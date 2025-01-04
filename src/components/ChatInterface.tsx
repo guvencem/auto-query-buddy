@@ -74,14 +74,14 @@ export const ChatInterface = () => {
   return (
     <div className="w-full max-w-2xl mx-auto p-4">
       <div className="mb-4 text-center">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-foreground/70">
           Kalan ücretsiz soru hakkınız: {remainingQuestions}
         </p>
       </div>
       
       {/* Ad Space Top */}
-      <div className="w-full h-[100px] bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
-        <p className="text-gray-400">Reklam Alanı</p>
+      <div className="w-full h-[100px] bg-secondary/30 rounded-lg mb-4 flex items-center justify-center">
+        <p className="text-foreground/40">Reklam Alanı</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -89,16 +89,16 @@ export const ChatInterface = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Aracınızla ilgili sorunuzu yazın..."
-          className="min-h-[120px] bg-white/80 backdrop-blur-sm border-2 border-blue-100 focus:border-blue-300 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md"
+          className="min-h-[120px] bg-white/80 backdrop-blur-sm border-2 border-primary/20 focus:border-primary rounded-xl transition-all duration-300 shadow-sm hover:shadow-md text-foreground placeholder:text-foreground/50"
         />
         <Button
           type="submit"
-          className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-3 rounded-xl transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="btn-neon w-full"
           disabled={!message.trim() || isLoading}
         >
           {isLoading ? (
             <span className="flex items-center">
-              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
@@ -115,20 +115,20 @@ export const ChatInterface = () => {
 
       {/* Response Dialog */}
       <Dialog open={showDialog} onOpenChange={handleCloseDialog}>
-        <DialogContent className="sm:relative sm:inset-auto max-h-[90vh] sm:max-h-[80vh] w-full sm:max-w-[600px] mx-auto bg-gradient-to-b from-white to-blue-50 p-4 sm:p-6 rounded-t-3xl sm:rounded-2xl shadow-xl border-2 border-blue-100 overflow-y-auto">
+        <DialogContent className="sm:max-w-[600px] bg-secondary/50 backdrop-blur-sm border-2 border-primary/20">
           <DialogHeader>
-            <DialogTitle className="text-xl sm:text-2xl font-bold text-blue-900 mb-2 sm:mb-4">
+            <DialogTitle className="text-2xl font-bold text-foreground">
               Uzman Yanıtı
             </DialogTitle>
           </DialogHeader>
-          <div className="mt-2 sm:mt-4 space-y-4 max-h-[60vh] sm:max-h-[50vh] overflow-y-auto px-2">
-            <p className="text-base sm:text-lg text-gray-700 whitespace-pre-wrap leading-relaxed">
+          <div className="mt-4 space-y-4 max-h-[50vh] overflow-y-auto px-2">
+            <p className="text-lg text-foreground/80 whitespace-pre-wrap leading-relaxed">
               {answer}
             </p>
           </div>
           <Button
             onClick={handleCloseDialog}
-            className="mt-4 sm:mt-6 w-full bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 text-white font-medium py-2 rounded-xl transform transition-all duration-300 hover:scale-[1.02]"
+            className="btn-neon mt-4"
           >
             Anladım
           </Button>
@@ -137,38 +137,38 @@ export const ChatInterface = () => {
 
       {/* Membership Dialog */}
       <Dialog open={showMembershipDialog} onOpenChange={setShowMembershipDialog}>
-        <DialogContent className="sm:relative sm:inset-auto max-w-[95vw] sm:max-w-[500px] mx-auto bg-gradient-to-br from-indigo-50 via-white to-blue-50 p-6 rounded-2xl shadow-2xl border-2 border-blue-200">
+        <DialogContent className="sm:max-w-[500px] bg-secondary/50 backdrop-blur-sm border-2 border-primary/20">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-center text-indigo-900 flex items-center justify-center gap-2">
-              <Crown className="w-6 h-6 text-yellow-500" />
+            <DialogTitle className="text-2xl font-bold text-center text-foreground flex items-center justify-center gap-2">
+              <Crown className="w-6 h-6 text-primary" />
               Premium Üyelik
             </DialogTitle>
           </DialogHeader>
           
           <div className="mt-6 space-y-6">
             <div className="text-center">
-              <p className="text-lg text-gray-700 mb-4">
+              <p className="text-lg text-foreground/80">
                 Ücretsiz soru hakkınız doldu. Premium üyelik ile sınırsız soru sorabilirsiniz!
               </p>
             </div>
 
             <div className="space-y-4">
-              <div className="bg-white/60 p-4 rounded-xl shadow-sm border border-blue-100">
+              <div className="bg-white/60 backdrop-blur-sm p-4 rounded-xl border border-primary/20">
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <p className="text-gray-700">Sınırsız soru sorma hakkı</p>
+                  <Check className="w-5 h-5 text-primary" />
+                  <p className="text-foreground/80">Sınırsız soru sorma hakkı</p>
                 </div>
               </div>
-              <div className="bg-white/60 p-4 rounded-xl shadow-sm border border-blue-100">
+              <div className="bg-white/60 backdrop-blur-sm p-4 rounded-xl border border-primary/20">
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <p className="text-gray-700">Öncelikli yanıt alma</p>
+                  <Check className="w-5 h-5 text-primary" />
+                  <p className="text-foreground/80">Öncelikli yanıt alma</p>
                 </div>
               </div>
-              <div className="bg-white/60 p-4 rounded-xl shadow-sm border border-blue-100">
+              <div className="bg-white/60 backdrop-blur-sm p-4 rounded-xl border border-primary/20">
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <p className="text-gray-700">Reklamsız deneyim</p>
+                  <Check className="w-5 h-5 text-primary" />
+                  <p className="text-foreground/80">Reklamsız deneyim</p>
                 </div>
               </div>
             </div>
@@ -176,13 +176,13 @@ export const ChatInterface = () => {
             <div className="pt-4">
               <Button
                 onClick={() => setShowMembershipDialog(false)}
-                className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-medium py-6 rounded-xl transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg text-lg"
+                className="btn-neon w-full"
               >
                 Premium Üyeliğe Geç
               </Button>
               <button
                 onClick={() => setShowMembershipDialog(false)}
-                className="w-full mt-4 text-gray-500 hover:text-gray-700 transition-colors text-sm"
+                className="w-full mt-4 text-foreground/60 hover:text-foreground transition-colors text-sm"
               >
                 Belki daha sonra
               </button>
@@ -193,21 +193,21 @@ export const ChatInterface = () => {
 
       {/* Advertisement Dialog */}
       {showAd && (
-        <div className="fixed bottom-4 right-4 bg-white rounded-2xl shadow-2xl p-4 w-[90vw] sm:w-[300px] animate-fadeIn border-2 border-blue-100">
+        <div className="fixed bottom-4 right-4 bg-secondary/50 backdrop-blur-sm rounded-2xl shadow-2xl p-4 w-[90vw] sm:w-[300px] animate-fadeIn border-2 border-primary/20">
           <div className="relative">
             {canCloseAd && (
               <button
                 onClick={() => setShowAd(false)}
-                className="absolute -top-2 -right-2 bg-white rounded-full p-2 hover:bg-gray-100 transition-colors shadow-lg border border-gray-200"
+                className="absolute -top-2 -right-2 bg-white rounded-full p-2 hover:bg-secondary/80 transition-colors shadow-lg border border-primary/20"
               >
-                <X className="w-4 h-4 text-gray-600" />
+                <X className="w-4 h-4 text-foreground/60" />
               </button>
             )}
-            <div className="h-[200px] bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl flex items-center justify-center border border-blue-100">
-              <p className="text-gray-600 font-medium">Reklam İçeriği</p>
+            <div className="h-[200px] bg-white/60 backdrop-blur-sm rounded-xl flex items-center justify-center border border-primary/20">
+              <p className="text-foreground/60 font-medium">Reklam İçeriği</p>
             </div>
             {!canCloseAd && (
-              <p className="text-sm text-gray-600 mt-3 text-center bg-blue-50 py-2 px-3 rounded-lg">
+              <p className="text-sm text-foreground/60 mt-3 text-center bg-white/60 backdrop-blur-sm py-2 px-3 rounded-lg">
                 Reklamı 5 saniye sonra kapatabilirsiniz
               </p>
             )}
@@ -216,8 +216,8 @@ export const ChatInterface = () => {
       )}
 
       {/* Ad Space Bottom */}
-      <div className="w-full h-[100px] bg-gray-100 rounded-lg mt-4 flex items-center justify-center">
-        <p className="text-gray-400">Reklam Alanı</p>
+      <div className="w-full h-[100px] bg-secondary/30 rounded-lg mt-4 flex items-center justify-center">
+        <p className="text-foreground/40">Reklam Alanı</p>
       </div>
     </div>
   );
