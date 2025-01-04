@@ -13,7 +13,7 @@ const Index = () => {
             <img 
               src="/lovable-uploads/0c7dfd7d-d317-4b51-975c-b77e96d1423b.png" 
               alt="Araba Akademisi Logo" 
-              className="h-8 md:h-10"
+              className="h-12 md:h-16" // Logo boyutunu artırdım
             />
           </div>
           <Button variant="outline">
