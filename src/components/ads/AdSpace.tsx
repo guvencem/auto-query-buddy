@@ -1,3 +1,12 @@
+import React from "react";
+
+// Add type definition for window.adsbygoogle
+declare global {
+  interface Window {
+    adsbygoogle: any[];
+  }
+}
+
 interface AdSpaceProps {
   position: "top" | "bottom";
 }

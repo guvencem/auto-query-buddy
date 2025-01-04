@@ -1,6 +1,13 @@
 import { X } from "lucide-react";
 import React from "react";
 
+// Add type definition for window.adsbygoogle
+declare global {
+  interface Window {
+    adsbygoogle: any[];
+  }
+}
+
 interface FloatingAdProps {
   show: boolean;
   onClose: () => void;
