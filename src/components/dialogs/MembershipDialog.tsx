@@ -32,11 +32,6 @@ export const MembershipDialog = ({ open, onClose }: MembershipDialogProps) => {
 
   const handlePremiumClick = async () => {
     if (!isAuthenticated) {
-      toast({
-        title: "Giriş Yapmanız Gerekiyor",
-        description: "Premium üyelik için lütfen önce giriş yapın veya kayıt olun.",
-        variant: "destructive",
-      });
       onClose();
       // Kullanıcıyı giriş sayfasına yönlendir
       navigate("/login");
