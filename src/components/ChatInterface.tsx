@@ -102,7 +102,7 @@ export const ChatInterface = () => {
         <Textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Aracınızla ilgili sorunuzu yazın..."
+          placeholder="Araçla ilgili ne sorunun varsa, yazman yeter!"
           className="min-h-[120px] bg-white/80 backdrop-blur-sm border-2 border-primary/20 focus:border-primary rounded-xl transition-all duration-300 shadow-sm hover:shadow-md text-foreground placeholder:text-foreground/50"
         />
         

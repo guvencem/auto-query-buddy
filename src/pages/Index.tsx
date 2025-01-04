@@ -7,12 +7,12 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
       {/* Header */}
       <header className="bg-[#9b87f5] shadow-lg animate-fadeIn">
-        <div className="max-w-7xl mx-auto px-4 py-0.5 flex justify-center items-center"> {/* Reduced py-2 to py-0.5 */}
+        <div className="max-w-7xl mx-auto px-4 py-0.5 flex justify-center items-center">
           <div className="transform hover:scale-105 transition-transform duration-300">
             <img 
               src="/lovable-uploads/0c7dfd7d-d317-4b51-975c-b77e96d1423b.png" 
               alt="Araba Akademisi Logo" 
-              className="h-20 md:h-28 hover:drop-shadow-xl transition-all" // Reduced from h-64/h-80 to h-20/h-28
+              className="h-20 md:h-28 hover:drop-shadow-xl transition-all"
             />
           </div>
         </div>
@@ -22,11 +22,10 @@ const Index = () => {
       <main className="container mx-auto py-8">
         <div className="text-center mb-8 animate-fadeIn">
           <h2 className="text-2xl md:text-3xl font-bold text-[#6E59A5] mb-4 hover:text-[#8A6FD3] transition-colors">
-            Araç Sorunlarınıza Anında Çözüm
+            Araç Sorunlarına Hızlı ve Kolay Çözüm!
           </h2>
           <p className="text-[#7E69AB] text-lg max-w-2xl mx-auto hover:text-[#9A85C7] transition-colors">
-            Aracınızla ilgili her türlü soruyu yapay zeka destekli sistemimize sorabilirsiniz. 
-            Uzman yanıtları anında alın.
+            Araç marka, model ve yaşadığın sorunu buraya yaz, yapay zeka destekli çözümümüz sana saniyeler içinde yardımcı olsun!
           </p>
         </div>
 
