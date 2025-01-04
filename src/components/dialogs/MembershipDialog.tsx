@@ -6,6 +6,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Crown, Check, Sparkles } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 interface MembershipDialogProps {
   open: boolean;
@@ -13,6 +17,36 @@ interface MembershipDialogProps {
 }
 
 export const MembershipDialog = ({ open, onClose }: MembershipDialogProps) => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    setIsAuthenticated(!!session);
+  };
+
+  const handlePremiumClick = async () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Giriş Yapmanız Gerekiyor",
+        description: "Premium üyelik için lütfen önce giriş yapın veya kayıt olun.",
+        variant: "destructive",
+      });
+      onClose();
+      // Kullanıcıyı giriş sayfasına yönlendir
+      navigate("/login");
+      return;
+    }
+
+    // Premium üyelik işlemleri buraya eklenecek
+    console.log("Premium üyelik işlemleri başlatılıyor...");
+  };
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[500px] bg-white/95 backdrop-blur-sm border-2 border-primary shadow-[0_0_15px_rgba(16,185,129,0.3)]">
@@ -29,7 +63,9 @@ export const MembershipDialog = ({ open, onClose }: MembershipDialogProps) => {
               Premium üyelik ile sınırsız soru sorabilirsiniz!
             </p>
             <p className="mt-2 text-muted-foreground">
-              Ücretsiz soru hakkınız doldu. Hemen premium üye olun!
+              {isAuthenticated 
+                ? "Ücretsiz soru hakkınız doldu. Hemen premium üye olun!"
+                : "Premium üyelik için lütfen giriş yapın veya kayıt olun."}
             </p>
           </div>
 
@@ -64,10 +100,10 @@ export const MembershipDialog = ({ open, onClose }: MembershipDialogProps) => {
 
           <div className="pt-6">
             <Button
-              onClick={onClose}
+              onClick={handlePremiumClick}
               className="w-full h-14 text-lg font-bold bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
             >
-              Premium Üyeliğe Geç
+              {isAuthenticated ? "Premium Üyeliğe Geç" : "Giriş Yap ve Premium Ol"}
             </Button>
             <button
               onClick={onClose}
