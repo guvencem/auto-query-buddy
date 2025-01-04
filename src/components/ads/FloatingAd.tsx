@@ -1,4 +1,5 @@
 import { X } from "lucide-react";
+import Script from 'next/script';
 
 interface FloatingAdProps {
   show: boolean;
@@ -8,6 +9,9 @@ interface FloatingAdProps {
 
 export const FloatingAd = ({ show, onClose, canClose }: FloatingAdProps) => {
   if (!show) return null;
+
+  // Google AdSense reklam birimi ID'si - kendi AdSense kodunuzla değiştirin
+  const adUnitId = "ca-pub-XXXXXXXXXXXXXXXX";
 
   return (
     <div className="fixed bottom-4 right-4 bg-secondary/50 backdrop-blur-sm rounded-2xl shadow-2xl p-4 w-[90vw] sm:w-[300px] animate-fadeIn border-2 border-primary/20">
@@ -20,9 +24,23 @@ export const FloatingAd = ({ show, onClose, canClose }: FloatingAdProps) => {
             <X className="w-4 h-4 text-foreground/60" />
           </button>
         )}
-        <div className="h-[200px] bg-white/60 backdrop-blur-sm rounded-xl flex items-center justify-center border border-primary/20">
-          <p className="text-foreground/60 font-medium">Reklam İçeriği</p>
+        
+        <div className="min-h-[200px]">
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client={adUnitId}
+            data-ad-slot="XXXXXXXXXX"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
+          <Script id="floating-adsbygoogle" strategy="afterInteractive">
+            {`
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            `}
+          </Script>
         </div>
+
         {!canClose && (
           <p className="text-sm text-foreground/60 mt-3 text-center bg-white/60 backdrop-blur-sm py-2 px-3 rounded-lg">
             Reklamı 5 saniye sonra kapatabilirsiniz
