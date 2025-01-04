@@ -1,7 +1,7 @@
 import { CookieConsent } from "@/components/CookieConsent";
 import { ChatInterface } from "@/components/ChatInterface";
 import { Button } from "@/components/ui/button";
-import { LogIn } from "lucide-react";
+import { LogIn, Crown } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -12,9 +12,11 @@ import { useState } from "react";
 import { Auth } from "@supabase/auth-ui-react";
 import { supabase } from "@/integrations/supabase/client";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
+import { MembershipDialog } from "@/components/dialogs/MembershipDialog";
 
 const Index = () => {
   const [showLoginDialog, setShowLoginDialog] = useState(false);
+  const [showMembershipDialog, setShowMembershipDialog] = useState(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
@@ -28,13 +30,22 @@ const Index = () => {
               className="h-20 md:h-24"
             />
           </div>
-          <Button 
-            className="btn-neon"
-            onClick={() => setShowLoginDialog(true)}
-          >
-            <LogIn className="w-4 h-4 mr-2" />
-            Giriş Yap
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button 
+              className="btn-neon"
+              onClick={() => setShowMembershipDialog(true)}
+            >
+              <Crown className="w-4 h-4 mr-2" />
+              Premium Ol
+            </Button>
+            <Button 
+              className="btn-neon"
+              onClick={() => setShowLoginDialog(true)}
+            >
+              <LogIn className="w-4 h-4 mr-2" />
+              Giriş Yap
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -98,6 +109,12 @@ const Index = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Membership Dialog */}
+      <MembershipDialog 
+        open={showMembershipDialog} 
+        onClose={() => setShowMembershipDialog(false)} 
+      />
 
       <CookieConsent />
     </div>
