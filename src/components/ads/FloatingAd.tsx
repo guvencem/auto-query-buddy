@@ -1,7 +1,6 @@
 import { X } from "lucide-react";
 import React from "react";
 
-// Add type definition for window.adsbygoogle
 declare global {
   interface Window {
     adsbygoogle: any[];
@@ -12,15 +11,14 @@ interface FloatingAdProps {
   show: boolean;
   onClose: () => void;
   canClose: boolean;
+  remainingTime?: number;
 }
 
-export const FloatingAd = ({ show, onClose, canClose }: FloatingAdProps) => {
+export const FloatingAd = ({ show, onClose, canClose, remainingTime }: FloatingAdProps) => {
   if (!show) return null;
 
-  // Google AdSense reklam birimi ID'si - kendi AdSense kodunuzla değiştirin
   const adUnitId = "ca-pub-XXXXXXXXXXXXXXXX";
 
-  // AdSense kodunu yükle
   React.useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -52,9 +50,9 @@ export const FloatingAd = ({ show, onClose, canClose }: FloatingAdProps) => {
           />
         </div>
 
-        {!canClose && (
+        {!canClose && remainingTime !== undefined && (
           <p className="text-sm text-foreground/60 mt-3 text-center bg-white/60 backdrop-blur-sm py-2 px-3 rounded-lg">
-            Reklamı 5 saniye sonra kapatabilirsiniz
+            Reklamı {remainingTime} saniye sonra kapatabilirsiniz
           </p>
         )}
       </div>

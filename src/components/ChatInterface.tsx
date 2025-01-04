@@ -5,7 +5,6 @@ import { Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { ResponseDialog } from "./dialogs/ResponseDialog";
-import { MembershipDialog } from "./dialogs/MembershipDialog";
 import { AdSpace } from "./ads/AdSpace";
 import { FloatingAd } from "./ads/FloatingAd";
 
@@ -17,26 +16,45 @@ export const ChatInterface = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [showAd, setShowAd] = useState(false);
   const [canCloseAd, setCanCloseAd] = useState(false);
-  const [showMembershipDialog, setShowMembershipDialog] = useState(false);
   const [showRemainingQuestions, setShowRemainingQuestions] = useState(false);
+  const [adTimer, setAdTimer] = useState(60); // 60 saniye için sayaç
   const { toast } = useToast();
 
   useEffect(() => {
     if (showRemainingQuestions) {
       const timer = setTimeout(() => {
         setShowRemainingQuestions(false);
-      }, 10000); // 10 saniye sonra gizle
+      }, 10000);
 
       return () => clearTimeout(timer);
     }
   }, [showRemainingQuestions]);
+
+  // Reklam sayacı için useEffect
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (showAd && adTimer > 0) {
+      timer = setInterval(() => {
+        setAdTimer((prev) => prev - 1);
+      }, 1000);
+    } else if (adTimer === 0) {
+      setShowAd(false);
+      setAdTimer(60); // Sayacı sıfırla
+      setCanCloseAd(true);
+    }
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [showAd, adTimer]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim() || isLoading) return;
     
     if (remainingQuestions === 0) {
-      setShowMembershipDialog(true);
+      setShowAd(true);
+      setCanCloseAd(false);
+      setAdTimer(60);
       return;
     }
 
@@ -58,8 +76,8 @@ export const ChatInterface = () => {
       setAnswer(data.answer);
       setShowDialog(true);
       setRemainingQuestions((prev) => Math.max(0, prev - 1));
-      setMessage(""); // Clear the input after successful submission
-      setShowRemainingQuestions(true); // Show remaining questions notification
+      setMessage("");
+      setShowRemainingQuestions(true);
     } catch (error) {
       console.error('Error:', error);
       toast({
@@ -74,10 +92,6 @@ export const ChatInterface = () => {
 
   const handleCloseDialog = () => {
     setShowDialog(false);
-    setShowAd(true);
-    setTimeout(() => {
-      setCanCloseAd(true);
-    }, 5000);
   };
 
   return (
@@ -92,7 +106,6 @@ export const ChatInterface = () => {
           className="min-h-[120px] bg-white/80 backdrop-blur-sm border-2 border-primary/20 focus:border-primary rounded-xl transition-all duration-300 shadow-sm hover:shadow-md text-foreground placeholder:text-foreground/50"
         />
         
-        {/* Remaining Questions Notification */}
         {showRemainingQuestions && (
           <div className="animate-fade-in bg-white/80 backdrop-blur-sm p-3 rounded-lg border border-primary/20 text-center">
             <p className="text-sm text-foreground/70">
@@ -129,15 +142,16 @@ export const ChatInterface = () => {
         answer={answer}
       />
 
-      <MembershipDialog
-        open={showMembershipDialog}
-        onOpenChange={setShowMembershipDialog}
-      />
-
       <FloatingAd
         show={showAd}
-        onClose={() => setShowAd(false)}
+        onClose={() => {
+          if (canCloseAd) {
+            setShowAd(false);
+            setAdTimer(60);
+          }
+        }}
         canClose={canCloseAd}
+        remainingTime={adTimer}
       />
 
       <AdSpace position="bottom" />
