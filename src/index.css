@@ -4,26 +4,26 @@
  
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --background: 280 60% 97%; /* Açık mor arka plan */
+    --foreground: 0 0% 0%; /* Siyah metin */
+    --card: 280 60% 97%;
+    --card-foreground: 0 0% 0%;
+    --popover: 280 60% 97%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 142 84% 40%; /* Neon yeşil */
+    --primary-foreground: 0 0% 0%;
+    --secondary: 270 100% 95%; /* Açık mor */
+    --secondary-foreground: 0 0% 0%;
+    --muted: 280 60% 90%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 142 84% 40%;
+    --accent-foreground: 0 0% 0%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.75rem;
+    --destructive-foreground: 0 0% 98%;
+    --border: 280 60% 85%;
+    --input: 280 60% 85%;
+    --ring: 142 84% 40%;
+    --radius: 1rem;
   }
 }
 
@@ -32,6 +32,19 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-gradient-to-b from-secondary to-background text-foreground antialiased;
+  }
+}
+
+/* Özel buton stilleri */
+@layer components {
+  .btn-neon {
+    @apply bg-primary text-black font-bold py-2 px-4 rounded-full 
+           border-2 border-black hover:bg-accent transition-all 
+           shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] 
+           hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+           active:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]
+           active:translate-x-[4px]
+           active:translate-y-[4px];
   }
 }
