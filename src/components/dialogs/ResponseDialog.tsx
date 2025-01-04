@@ -13,8 +13,13 @@ interface ResponseDialogProps {
 }
 
 const formatMarkdownText = (text: string) => {
-  // Bold başlıkları işle (**text**)
-  return text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-foreground">$1</strong>');
+  // Önce ### başlıkları işle
+  let formattedText = text.replace(/###\s*(.*?)(\n|$)/g, '<h3 class="text-xl font-bold text-foreground mt-4 mb-2">$1</h3>');
+  
+  // Sonra bold metinleri işle (**text**)
+  formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-foreground">$1</strong>');
+  
+  return formattedText;
 };
 
 export const ResponseDialog = ({ open, onClose, answer }: ResponseDialogProps) => {
@@ -27,7 +32,7 @@ export const ResponseDialog = ({ open, onClose, answer }: ResponseDialogProps) =
           </DialogTitle>
         </DialogHeader>
         <div className="mt-4 space-y-4 max-h-[50vh] overflow-y-auto px-2">
-          <p 
+          <div
             className="text-lg text-foreground whitespace-pre-wrap leading-relaxed"
             dangerouslySetInnerHTML={{ __html: formatMarkdownText(answer) }}
           />
