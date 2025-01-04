@@ -118,7 +118,6 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
                 },
               }}
               providers={[]}
-              view="sign_in"
               localization={{
                 variables: {
                   sign_in: {
@@ -139,6 +138,8 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
                   }
                 },
               }}
+              view="sign_in"
+              showLinks={true}
             />
           </div>
         )}
