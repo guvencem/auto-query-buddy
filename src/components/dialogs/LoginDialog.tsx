@@ -86,10 +86,12 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
                   button_label: 'Kayıt ol',
                   loading_button_label: 'Kaydediliyor...',
                   link_text: 'Zaten hesabınız var mı? Giriş yapın',
+                  header_text: 'Kayıt ol',
                 },
               },
             }}
             providers={[]}
+            view="sign_up"
           />
         </div>
       </DialogContent>
