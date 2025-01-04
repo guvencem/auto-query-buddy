@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Send, X, Check, Crown } from "lucide-react";
+import { Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { ResponseDialog } from "./dialogs/ResponseDialog";
+import { MembershipDialog } from "./dialogs/MembershipDialog";
+import { AdSpace } from "./ads/AdSpace";
+import { FloatingAd } from "./ads/FloatingAd";
 
 export const ChatInterface = () => {
   const [message, setMessage] = useState("");
@@ -82,17 +80,9 @@ export const ChatInterface = () => {
     }, 5000);
   };
 
-  const formatMarkdownText = (text: string) => {
-    // Bold başlıkları işle (**text**)
-    return text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-foreground">$1</strong>');
-  };
-
   return (
     <div className="w-full max-w-2xl mx-auto p-4">
-      {/* Ad Space Top */}
-      <div className="w-full h-[100px] bg-secondary/30 rounded-lg mb-4 flex items-center justify-center">
-        <p className="text-foreground/40">Reklam Alanı</p>
-      </div>
+      <AdSpace position="top" />
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <Textarea
@@ -133,113 +123,24 @@ export const ChatInterface = () => {
         </Button>
       </form>
 
-      {/* Response Dialog */}
-      <Dialog open={showDialog} onOpenChange={handleCloseDialog}>
-        <DialogContent className="sm:max-w-[600px] bg-white/95 backdrop-blur-sm border-2 border-primary/20">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-foreground">
-              Uzman Yanıtı
-            </DialogTitle>
-          </DialogHeader>
-          <div className="mt-4 space-y-4 max-h-[50vh] overflow-y-auto px-2">
-            <p 
-              className="text-lg text-foreground whitespace-pre-wrap leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: formatMarkdownText(answer) }}
-            />
-          </div>
-          <Button
-            onClick={handleCloseDialog}
-            className="btn-neon mt-4"
-          >
-            Anladım
-          </Button>
-        </DialogContent>
-      </Dialog>
+      <ResponseDialog 
+        open={showDialog}
+        onClose={handleCloseDialog}
+        answer={answer}
+      />
 
-      {/* Membership Dialog */}
-      <Dialog open={showMembershipDialog} onOpenChange={setShowMembershipDialog}>
-        <DialogContent className="sm:max-w-[500px] bg-secondary/50 backdrop-blur-sm border-2 border-primary/20">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-center text-foreground flex items-center justify-center gap-2">
-              <Crown className="w-6 h-6 text-primary" />
-              Premium Üyelik
-            </DialogTitle>
-          </DialogHeader>
-          
-          <div className="mt-6 space-y-6">
-            <div className="text-center">
-              <p className="text-lg text-foreground/80">
-                Ücretsiz soru hakkınız doldu. Premium üyelik ile sınırsız soru sorabilirsiniz!
-              </p>
-            </div>
+      <MembershipDialog
+        open={showMembershipDialog}
+        onClose={() => setShowMembershipDialog(false)}
+      />
 
-            <div className="space-y-4">
-              <div className="bg-white/60 backdrop-blur-sm p-4 rounded-xl border border-primary/20">
-                <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-primary" />
-                  <p className="text-foreground/80">Sınırsız soru sorma hakkı</p>
-                </div>
-              </div>
-              <div className="bg-white/60 backdrop-blur-sm p-4 rounded-xl border border-primary/20">
-                <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-primary" />
-                  <p className="text-foreground/80">Öncelikli yanıt alma</p>
-                </div>
-              </div>
-              <div className="bg-white/60 backdrop-blur-sm p-4 rounded-xl border border-primary/20">
-                <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-primary" />
-                  <p className="text-foreground/80">Reklamsız deneyim</p>
-                </div>
-              </div>
-            </div>
+      <FloatingAd
+        show={showAd}
+        onClose={() => setShowAd(false)}
+        canClose={canCloseAd}
+      />
 
-            <div className="pt-4">
-              <Button
-                onClick={() => setShowMembershipDialog(false)}
-                className="btn-neon w-full"
-              >
-                Premium Üyeliğe Geç
-              </Button>
-              <button
-                onClick={() => setShowMembershipDialog(false)}
-                className="w-full mt-4 text-foreground/60 hover:text-foreground transition-colors text-sm"
-              >
-                Belki daha sonra
-              </button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Advertisement Dialog */}
-      {showAd && (
-        <div className="fixed bottom-4 right-4 bg-secondary/50 backdrop-blur-sm rounded-2xl shadow-2xl p-4 w-[90vw] sm:w-[300px] animate-fadeIn border-2 border-primary/20">
-          <div className="relative">
-            {canCloseAd && (
-              <button
-                onClick={() => setShowAd(false)}
-                className="absolute -top-2 -right-2 bg-white rounded-full p-2 hover:bg-secondary/80 transition-colors shadow-lg border border-primary/20"
-              >
-                <X className="w-4 h-4 text-foreground/60" />
-              </button>
-            )}
-            <div className="h-[200px] bg-white/60 backdrop-blur-sm rounded-xl flex items-center justify-center border border-primary/20">
-              <p className="text-foreground/60 font-medium">Reklam İçeriği</p>
-            </div>
-            {!canCloseAd && (
-              <p className="text-sm text-foreground/60 mt-3 text-center bg-white/60 backdrop-blur-sm py-2 px-3 rounded-lg">
-                Reklamı 5 saniye sonra kapatabilirsiniz
-              </p>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Ad Space Bottom */}
-      <div className="w-full h-[100px] bg-secondary/30 rounded-lg mt-4 flex items-center justify-center">
-        <p className="text-foreground/40">Reklam Alanı</p>
-      </div>
+      <AdSpace position="bottom" />
     </div>
   );
 };
