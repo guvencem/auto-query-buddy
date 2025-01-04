@@ -7,12 +7,12 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
       {/* Header */}
       <header className="bg-[#9b87f5] shadow-lg animate-fadeIn">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex justify-center items-center"> {/* Reduced py-6 to py-2 */}
+        <div className="max-w-7xl mx-auto px-4 py-0.5 flex justify-center items-center"> {/* Reduced py-2 to py-0.5 */}
           <div className="transform hover:scale-105 transition-transform duration-300">
             <img 
               src="/lovable-uploads/0c7dfd7d-d317-4b51-975c-b77e96d1423b.png" 
               alt="Araba Akademisi Logo" 
-              className="h-64 md:h-80 hover:drop-shadow-xl transition-all" // Doubled the height from h-32 to h-64 and h-40 to h-80
+              className="h-64 md:h-80 hover:drop-shadow-xl transition-all"
             />
           </div>
         </div>
