@@ -19,7 +19,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
       {/* Header */}
-      <header className="bg-secondary/50 backdrop-blur-sm shadow-sm">
+      <header className="bg-[#9b87f5] shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <img 
@@ -41,10 +41,10 @@ const Index = () => {
       {/* Main Content */}
       <main className="container mx-auto py-8">
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#6E59A5] mb-4">
             Araç Sorunlarınıza Anında Çözüm
           </h2>
-          <p className="text-foreground/80 max-w-2xl mx-auto">
+          <p className="text-[#7E69AB] text-lg max-w-2xl mx-auto">
             Aracınızla ilgili her türlü soruyu yapay zeka destekli sistemimize sorabilirsiniz. 
             Uzman yanıtları anında alın.
           </p>
@@ -57,7 +57,7 @@ const Index = () => {
       <Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
         <DialogContent className="sm:max-w-[400px] p-0 bg-secondary/50 backdrop-blur-sm">
           <DialogHeader className="px-6 pt-6">
-            <DialogTitle className="text-2xl font-bold text-center">Giriş Yap</DialogTitle>
+            <DialogTitle className="text-2xl font-bold text-center text-[#6E59A5]">Giriş Yap</DialogTitle>
           </DialogHeader>
           <div className="px-6 pb-6">
             <Auth
