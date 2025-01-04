@@ -78,7 +78,7 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
                   password_label: 'Şifre',
                   button_label: 'Giriş yap',
                   loading_button_label: 'Giriş yapılıyor...',
-                  link_text: 'Hesabınız yok mu? Kayıt olun',
+                  link_text: 'Hesabın yok mu? Kayıt ol',
                 },
                 sign_up: {
                   email_label: 'Email adresi',
@@ -86,12 +86,10 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
                   button_label: 'Kayıt ol',
                   loading_button_label: 'Kaydediliyor...',
                   link_text: 'Zaten hesabınız var mı? Giriş yapın',
-                  header_text: 'Kayıt ol',
                 },
               },
             }}
             providers={[]}
-            view="sign_up"
           />
         </div>
       </DialogContent>
