@@ -83,7 +83,7 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
                 sign_up: {
                   email_label: 'Email adresi',
                   password_label: 'Şifre',
-                  password_label_confirmation: 'Şifreyi tekrar girin',
+                  confirmation_text: 'Şifreyi tekrar girin',
                   button_label: 'Kayıt ol',
                   loading_button_label: 'Kaydediliyor...',
                   link_text: 'Zaten hesabınız var mı? Giriş yapın',
