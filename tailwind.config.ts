@@ -18,6 +18,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        quicksand: ['Quicksand', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -25,15 +28,15 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#10B981", // Neon yeşil
+          DEFAULT: "#10B981",
           foreground: "#000000",
         },
         secondary: {
-          DEFAULT: "#F3E8FF", // Açık mor
+          DEFAULT: "#F3E8FF",
           foreground: "#000000",
         },
         accent: {
-          DEFAULT: "#4ADE80", // Parlak yeşil
+          DEFAULT: "#4ADE80",
           foreground: "#000000",
         },
         destructive: {

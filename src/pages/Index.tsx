@@ -4,7 +4,7 @@ import { Instagram } from "lucide-react";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
+    <div className="min-h-screen bg-gradient-to-b from-secondary to-background font-quicksand">
       {/* Header */}
       <header className="bg-[#9b87f5] shadow-lg animate-fadeIn">
         <div className="max-w-7xl mx-auto px-4 py-0.5 flex justify-center items-center">
