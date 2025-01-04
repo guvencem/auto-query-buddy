@@ -1,15 +1,24 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Send } from "lucide-react";
+import { Send, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export const ChatInterface = () => {
   const [message, setMessage] = useState("");
   const [remainingQuestions, setRemainingQuestions] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
   const [answer, setAnswer] = useState("");
+  const [showDialog, setShowDialog] = useState(false);
+  const [showAd, setShowAd] = useState(false);
+  const [canCloseAd, setCanCloseAd] = useState(false);
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -32,6 +41,7 @@ export const ChatInterface = () => {
       }
 
       setAnswer(data.answer);
+      setShowDialog(true);
       setRemainingQuestions((prev) => Math.max(0, prev - 1));
       setMessage(""); // Clear the input after successful submission
     } catch (error) {
@@ -44,6 +54,15 @@ export const ChatInterface = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleCloseDialog = () => {
+    setShowDialog(false);
+    setShowAd(true);
+    // Start 5-second timer for ad close button
+    setTimeout(() => {
+      setCanCloseAd(true);
+    }, 5000);
   };
 
   return (
@@ -88,10 +107,39 @@ export const ChatInterface = () => {
         </Button>
       </form>
 
-      {answer && (
-        <div className="mt-6 p-4 bg-white rounded-lg shadow">
-          <h3 className="font-semibold mb-2">Yanıt:</h3>
-          <p className="text-gray-700 whitespace-pre-wrap">{answer}</p>
+      {/* Response Dialog */}
+      <Dialog open={showDialog} onOpenChange={handleCloseDialog}>
+        <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>Yanıt</DialogTitle>
+          </DialogHeader>
+          <div className="mt-4">
+            <p className="text-gray-700 whitespace-pre-wrap">{answer}</p>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Advertisement Dialog */}
+      {showAd && (
+        <div className="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 w-[300px] animate-fadeIn">
+          <div className="relative">
+            {canCloseAd && (
+              <button
+                onClick={() => setShowAd(false)}
+                className="absolute -top-2 -right-2 bg-gray-100 rounded-full p-1 hover:bg-gray-200 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+            <div className="h-[200px] bg-gray-100 rounded flex items-center justify-center">
+              <p className="text-gray-400">Reklam İçeriği</p>
+            </div>
+            {!canCloseAd && (
+              <p className="text-xs text-gray-500 mt-2 text-center">
+                Reklamı 5 saniye sonra kapatabilirsiniz
+              </p>
+            )}
+          </div>
         </div>
       )}
 
