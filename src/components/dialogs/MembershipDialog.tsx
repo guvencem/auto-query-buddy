@@ -102,7 +102,7 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
             </div>
           </>
         ) : (
-          <div className="py-4 bg-white rounded-lg">
+          <div className="py-4">
             <DialogHeader className="mb-4">
               <DialogTitle className="text-2xl font-bold text-center text-gray-900">
                 Giriş Yap veya Hesap Oluştur
@@ -126,11 +126,17 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
                       inputBorderFocus: '#10B981',
                       inputBorderHover: '#10B981',
                       inputPlaceholder: '#6B7280',
+                      messageText: '#EF4444',
+                      messageBackground: '#FEE2E2',
+                      messageBorder: '#FCA5A5',
+                      anchorTextColor: '#10B981',
+                      anchorTextHoverColor: '#059669',
+                      dividerBackground: '#E5E7EB',
                     },
                   },
                 },
                 className: {
-                  container: 'auth-container bg-white p-4 rounded-lg',
+                  container: 'auth-container',
                   label: 'text-gray-900 font-medium mb-1 block',
                   button: 'bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-4 rounded-lg transition-colors w-full shadow-sm',
                   input: 'w-full px-3 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white text-gray-900 text-base',
