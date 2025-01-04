@@ -147,7 +147,7 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
                     button_label: 'Giriş yap',
                     loading_button_label: 'Giriş yapılıyor...',
                     link_text: 'Hesabınız yok mu? Kayıt olun',
-                    password_label_link: 'Şifreni mi unuttun?'
+                    forgotten_password_label: 'Şifreni mi unuttun?'
                   },
                   sign_up: {
                     email_label: 'Email adresi',
