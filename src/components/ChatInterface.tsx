@@ -41,6 +41,7 @@ export const ChatInterface = () => {
       setShowAd(false);
       setAdTimer(60); // Sayacı sıfırla
       setCanCloseAd(true);
+      setShowDialog(true); // Reklam bittiğinde cevabı göster
     }
     return () => {
       if (timer) clearInterval(timer);
@@ -51,13 +52,6 @@ export const ChatInterface = () => {
     e.preventDefault();
     if (!message.trim() || isLoading) return;
     
-    if (remainingQuestions === 0) {
-      setShowAd(true);
-      setCanCloseAd(false);
-      setAdTimer(60);
-      return;
-    }
-
     setIsLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke('generate-car-advice', {
@@ -74,7 +68,15 @@ export const ChatInterface = () => {
       }
 
       setAnswer(data.answer);
-      setShowDialog(true);
+      
+      if (remainingQuestions < 3) { // İlk sorudan sonraki tüm sorular için
+        setShowAd(true);
+        setCanCloseAd(false);
+        setAdTimer(60);
+      } else {
+        setShowDialog(true);
+      }
+      
       setRemainingQuestions((prev) => Math.max(0, prev - 1));
       setMessage("");
       setShowRemainingQuestions(true);
