@@ -57,11 +57,11 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] bg-white p-6">
+      <DialogContent className="bg-white p-6 rounded-lg max-w-sm mx-auto">
         {!showAuthUI ? (
           <>
-            <DialogHeader>
-              <DialogTitle className="text-2xl font-bold text-center text-gray-900">
+            <DialogHeader className="space-y-3">
+              <DialogTitle className="text-2xl font-semibold text-center text-gray-900">
                 Premium Üyelik
               </DialogTitle>
               <DialogDescription className="text-center text-gray-600">
@@ -69,25 +69,23 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
               </DialogDescription>
             </DialogHeader>
 
-            <div className="grid gap-6 py-4">
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-white border-2 border-primary/20 hover:border-primary/40 transition-colors">
-                  <Crown className="h-8 w-8 text-primary" />
-                  <div>
-                    <h3 className="font-semibold text-lg text-gray-900">Premium Özellikler</h3>
-                    <p className="text-gray-600">
-                      Sınırsız erişim ve özel içerikler
-                    </p>
+            <div className="mt-6 space-y-4">
+              <div className="p-4 rounded-lg border border-gray-100 bg-white hover:border-primary/20 transition-colors">
+                <div className="flex items-center gap-3">
+                  <Crown className="h-6 w-6 text-primary" />
+                  <div className="text-left">
+                    <h3 className="font-medium text-gray-900">Premium Özellikler</h3>
+                    <p className="text-sm text-gray-600">Sınırsız erişim ve özel içerikler</p>
                   </div>
                 </div>
+              </div>
 
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-white border-2 border-primary/20 hover:border-primary/40 transition-colors">
-                  <Crown className="h-8 w-8 text-primary" />
-                  <div>
-                    <h3 className="font-semibold text-lg text-gray-900">Öncelikli Destek</h3>
-                    <p className="text-gray-600">
-                      7/24 öncelikli müşteri desteği
-                    </p>
+              <div className="p-4 rounded-lg border border-gray-100 bg-white hover:border-primary/20 transition-colors">
+                <div className="flex items-center gap-3">
+                  <Crown className="h-6 w-6 text-primary" />
+                  <div className="text-left">
+                    <h3 className="font-medium text-gray-900">Öncelikli Destek</h3>
+                    <p className="text-sm text-gray-600">7/24 öncelikli müşteri desteği</p>
                   </div>
                 </div>
               </div>
@@ -95,7 +93,7 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
               <button
                 onClick={handlePremiumClick}
                 disabled={loading}
-                className="w-full btn-neon"
+                className="w-full bg-primary text-white py-3 px-4 rounded-lg font-medium hover:bg-primary/90 transition-colors"
               >
                 {loading ? "İşleniyor..." : "Premium Üye Ol"}
               </button>
@@ -103,35 +101,36 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
           </>
         ) : (
           <div className="py-4">
-            <DialogHeader className="mb-4">
-              <DialogTitle className="text-2xl font-bold text-center text-gray-900">
-                Giriş Yap veya Hesap Oluştur
+            <DialogHeader className="mb-6">
+              <DialogTitle className="text-2xl font-semibold text-center text-gray-900">
+                Giriş Yap
               </DialogTitle>
-              <DialogDescription className="text-center text-gray-600">
-                Premium üyelik için devam edin
-              </DialogDescription>
             </DialogHeader>
             <Auth
               supabaseClient={supabase}
               appearance={{
                 theme: ThemeSupa,
                 style: {
+                  container: {
+                    color: '#1F2937',
+                  },
                   button: {
-                    background: '#10B981',
+                    backgroundColor: '#10B981',
                     color: 'white',
                     borderRadius: '8px',
-                    padding: '10px 20px',
-                    fontWeight: '600',
+                    padding: '12px 20px',
+                    fontWeight: '500',
+                    border: 'none',
                   },
                   input: {
-                    background: 'white',
-                    borderColor: '#D1D5DB',
+                    backgroundColor: 'white',
+                    borderColor: '#E5E7EB',
                     borderRadius: '8px',
-                    padding: '10px 16px',
+                    padding: '12px 16px',
                     color: '#1F2937',
                   },
                   label: {
-                    color: '#1F2937',
+                    color: '#4B5563',
                     fontWeight: '500',
                     marginBottom: '4px',
                   },
@@ -140,12 +139,19 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
                     fontWeight: '500',
                   },
                   message: {
-                    color: '#EF4444',
-                    background: '#FEE2E2',
-                    borderColor: '#FCA5A5',
+                    backgroundColor: '#FEF2F2',
+                    color: '#DC2626',
                     padding: '8px 12px',
                     borderRadius: '6px',
+                    marginBottom: '16px',
                   },
+                },
+                className: {
+                  container: 'auth-container',
+                  button: 'auth-button',
+                  input: 'auth-input',
+                  label: 'auth-label',
+                  message: 'auth-message',
                 },
               }}
               localization={{
