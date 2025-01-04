@@ -131,7 +131,7 @@ export const ChatInterface = () => {
 
       <MembershipDialog
         open={showMembershipDialog}
-        onClose={() => setShowMembershipDialog(false)}
+        onOpenChange={setShowMembershipDialog}
       />
 
       <FloatingAd

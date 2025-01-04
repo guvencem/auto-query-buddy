@@ -112,8 +112,8 @@ const Index = () => {
 
       {/* Membership Dialog */}
       <MembershipDialog 
-        open={showMembershipDialog} 
-        onClose={() => setShowMembershipDialog(false)} 
+        open={showMembershipDialog}
+        onOpenChange={setShowMembershipDialog}
       />
 
       <CookieConsent />
