@@ -109,13 +109,13 @@ export const ChatInterface = () => {
 
       {/* Response Dialog */}
       <Dialog open={showDialog} onOpenChange={handleCloseDialog}>
-        <DialogContent className="fixed inset-x-0 bottom-0 sm:relative sm:inset-auto max-h-[90vh] sm:max-h-[80vh] w-full sm:max-w-[600px] mx-auto bg-gradient-to-b from-white to-blue-50 p-4 sm:p-6 rounded-t-3xl sm:rounded-2xl shadow-xl border-2 border-blue-100 overflow-y-auto">
+        <DialogContent className="fixed inset-0 sm:relative sm:inset-auto max-h-[90vh] sm:max-h-[80vh] w-full sm:max-w-[600px] mx-auto bg-gradient-to-b from-white to-blue-50 p-4 sm:p-6 rounded-t-3xl sm:rounded-2xl shadow-xl border-2 border-blue-100 overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-xl sm:text-2xl font-bold text-blue-900 mb-2 sm:mb-4">
               Uzman Yanıtı
             </DialogTitle>
           </DialogHeader>
-          <div className="mt-2 sm:mt-4 space-y-4">
+          <div className="mt-2 sm:mt-4 space-y-4 max-h-[60vh] sm:max-h-[50vh] overflow-y-auto px-2">
             <p className="text-base sm:text-lg text-gray-700 whitespace-pre-wrap leading-relaxed">
               {answer}
             </p>
