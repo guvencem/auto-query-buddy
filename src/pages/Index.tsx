@@ -9,7 +9,13 @@ const Index = () => {
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-primary">CarAdvisor</h1>
+          <div className="flex items-center space-x-2">
+            <img 
+              src="/lovable-uploads/0c7dfd7d-d317-4b51-975c-b77e96d1423b.png" 
+              alt="Araba Akademisi Logo" 
+              className="h-8 md:h-10"
+            />
+          </div>
           <Button variant="outline">
             <LogIn className="w-4 h-4 mr-2" />
             Giriş Yap
