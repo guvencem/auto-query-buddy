@@ -7,7 +7,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
       {/* Header */}
       <header className="bg-[#9b87f5] shadow-lg animate-fadeIn">
-        <div className="max-w-7xl mx-auto px-4 py-6 flex justify-center items-center">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex justify-center items-center"> {/* Reduced py-6 to py-2 */}
           <div className="transform hover:scale-105 transition-transform duration-300">
             <img 
               src="/lovable-uploads/0c7dfd7d-d317-4b51-975c-b77e96d1423b.png" 
