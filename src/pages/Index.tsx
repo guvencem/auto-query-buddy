@@ -17,9 +17,9 @@ const Index = () => {
   const [showLoginDialog, setShowLoginDialog] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
       {/* Header */}
-      <header className="bg-white shadow-sm">
+      <header className="bg-secondary/50 backdrop-blur-sm shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <img 
@@ -29,7 +29,7 @@ const Index = () => {
             />
           </div>
           <Button 
-            variant="outline"
+            className="btn-neon"
             onClick={() => setShowLoginDialog(true)}
           >
             <LogIn className="w-4 h-4 mr-2" />
@@ -41,10 +41,10 @@ const Index = () => {
       {/* Main Content */}
       <main className="container mx-auto py-8">
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
             Araç Sorunlarınıza Anında Çözüm
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-foreground/80 max-w-2xl mx-auto">
             Aracınızla ilgili her türlü soruyu yapay zeka destekli sistemimize sorabilirsiniz. 
             Uzman yanıtları anında alın.
           </p>
@@ -55,7 +55,7 @@ const Index = () => {
 
       {/* Login Dialog */}
       <Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
-        <DialogContent className="sm:max-w-[400px] p-0">
+        <DialogContent className="sm:max-w-[400px] p-0 bg-secondary/50 backdrop-blur-sm">
           <DialogHeader className="px-6 pt-6">
             <DialogTitle className="text-2xl font-bold text-center">Giriş Yap</DialogTitle>
           </DialogHeader>
@@ -67,8 +67,8 @@ const Index = () => {
                 variables: {
                   default: {
                     colors: {
-                      brand: '#4F46E5',
-                      brandAccent: '#4338CA',
+                      brand: '#10B981',
+                      brandAccent: '#4ADE80',
                     },
                   },
                 },
