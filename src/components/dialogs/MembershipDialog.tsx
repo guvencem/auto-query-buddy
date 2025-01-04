@@ -57,7 +57,7 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] bg-white">
+      <DialogContent className="sm:max-w-[425px] bg-white p-6">
         {!showAuthUI ? (
           <>
             <DialogHeader>
@@ -71,7 +71,7 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
 
             <div className="grid gap-6 py-4">
               <div className="space-y-4">
-                <div className="flex items-center gap-4 p-4 rounded-lg border-2 border-primary/20 hover:border-primary/40 transition-colors bg-white">
+                <div className="flex items-center gap-4 p-4 rounded-lg bg-white border-2 border-primary/20 hover:border-primary/40 transition-colors">
                   <Crown className="h-8 w-8 text-primary" />
                   <div>
                     <h3 className="font-semibold text-lg text-gray-900">Premium Özellikler</h3>
@@ -81,7 +81,7 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 p-4 rounded-lg border-2 border-primary/20 hover:border-primary/40 transition-colors bg-white">
+                <div className="flex items-center gap-4 p-4 rounded-lg bg-white border-2 border-primary/20 hover:border-primary/40 transition-colors">
                   <Crown className="h-8 w-8 text-primary" />
                   <div>
                     <h3 className="font-semibold text-lg text-gray-900">Öncelikli Destek</h3>
@@ -95,7 +95,7 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
               <button
                 onClick={handlePremiumClick}
                 disabled={loading}
-                className="w-full py-3 px-4 rounded-lg bg-primary hover:bg-primary/90 text-white font-semibold text-base transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+                className="w-full btn-neon"
               >
                 {loading ? "İşleniyor..." : "Premium Üye Ol"}
               </button>
@@ -115,37 +115,39 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
               supabaseClient={supabase}
               appearance={{
                 theme: ThemeSupa,
-                variables: {
-                  default: {
-                    colors: {
-                      brand: '#10B981',
-                      brandAccent: '#4ADE80',
-                      inputText: '#1A1F2C',
-                      inputBackground: '#FFFFFF',
-                      inputBorder: '#D1D5DB',
-                      inputBorderFocus: '#10B981',
-                      inputBorderHover: '#10B981',
-                      inputPlaceholder: '#6B7280',
-                      messageText: '#EF4444',
-                      messageBackground: '#FEE2E2',
-                      messageBorder: '#FCA5A5',
-                      anchorTextColor: '#10B981',
-                      anchorTextHoverColor: '#059669',
-                      dividerBackground: '#E5E7EB',
-                    },
+                style: {
+                  button: {
+                    background: '#10B981',
+                    color: 'white',
+                    borderRadius: '8px',
+                    padding: '10px 20px',
+                    fontWeight: '600',
+                  },
+                  input: {
+                    background: 'white',
+                    borderColor: '#D1D5DB',
+                    borderRadius: '8px',
+                    padding: '10px 16px',
+                    color: '#1F2937',
+                  },
+                  label: {
+                    color: '#1F2937',
+                    fontWeight: '500',
+                    marginBottom: '4px',
+                  },
+                  anchor: {
+                    color: '#10B981',
+                    fontWeight: '500',
+                  },
+                  message: {
+                    color: '#EF4444',
+                    background: '#FEE2E2',
+                    borderColor: '#FCA5A5',
+                    padding: '8px 12px',
+                    borderRadius: '6px',
                   },
                 },
-                className: {
-                  container: 'auth-container',
-                  label: 'text-gray-900 font-medium mb-1 block',
-                  button: 'bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-4 rounded-lg transition-colors w-full shadow-sm',
-                  input: 'w-full px-3 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white text-gray-900 text-base',
-                  anchor: 'text-primary hover:text-primary/80 font-medium',
-                  divider: 'bg-gray-200',
-                  message: 'text-red-600 text-sm',
-                },
               }}
-              providers={[]}
               localization={{
                 variables: {
                   sign_in: {
@@ -160,12 +162,11 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
                     password_label: 'Şifre',
                     button_label: 'Kayıt ol',
                     loading_button_label: 'Kaydediliyor...',
-                    link_text: 'Zaten hesabınız var mı? Giriş yapın'
-                  }
+                    link_text: 'Zaten hesabınız var mı? Giriş yapın',
+                  },
                 },
               }}
-              view="sign_in"
-              showLinks={true}
+              providers={[]}
             />
           </div>
         )}
