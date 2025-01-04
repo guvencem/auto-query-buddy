@@ -109,16 +109,20 @@ export const ChatInterface = () => {
 
       {/* Response Dialog */}
       <Dialog open={showDialog} onOpenChange={handleCloseDialog}>
-        <DialogContent className="sm:max-w-[600px] w-[95%] mx-auto bg-gradient-to-b from-white to-blue-50 p-6 rounded-2xl shadow-xl border-2 border-blue-100">
+        <DialogContent className="fixed inset-x-0 bottom-0 sm:relative sm:inset-auto max-h-[90vh] sm:max-h-[80vh] w-full sm:max-w-[600px] mx-auto bg-gradient-to-b from-white to-blue-50 p-4 sm:p-6 rounded-t-3xl sm:rounded-2xl shadow-xl border-2 border-blue-100 overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-blue-900 mb-4">Uzman Yanıtı</DialogTitle>
+            <DialogTitle className="text-xl sm:text-2xl font-bold text-blue-900 mb-2 sm:mb-4">
+              Uzman Yanıtı
+            </DialogTitle>
           </DialogHeader>
-          <div className="mt-4">
-            <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">{answer}</p>
+          <div className="mt-2 sm:mt-4 space-y-4">
+            <p className="text-base sm:text-lg text-gray-700 whitespace-pre-wrap leading-relaxed">
+              {answer}
+            </p>
           </div>
           <Button
             onClick={handleCloseDialog}
-            className="mt-6 w-full bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 text-white font-medium py-2 rounded-xl transform transition-all duration-300 hover:scale-[1.02]"
+            className="mt-4 sm:mt-6 w-full bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 text-white font-medium py-2 rounded-xl transform transition-all duration-300 hover:scale-[1.02]"
           >
             Anladım
           </Button>
@@ -127,7 +131,7 @@ export const ChatInterface = () => {
 
       {/* Advertisement Dialog */}
       {showAd && (
-        <div className="fixed bottom-4 right-4 bg-white rounded-2xl shadow-2xl p-4 w-[300px] animate-fadeIn border-2 border-blue-100">
+        <div className="fixed bottom-4 right-4 bg-white rounded-2xl shadow-2xl p-4 w-[90vw] sm:w-[300px] animate-fadeIn border-2 border-blue-100">
           <div className="relative">
             {canCloseAd && (
               <button
