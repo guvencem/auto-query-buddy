@@ -12,7 +12,7 @@ const Index = () => {
             <img 
               src="/lovable-uploads/0c7dfd7d-d317-4b51-975c-b77e96d1423b.png" 
               alt="Araba Akademisi Logo" 
-              className="h-64 md:h-80 hover:drop-shadow-xl transition-all"
+              className="h-20 md:h-28 hover:drop-shadow-xl transition-all" // Reduced from h-64/h-80 to h-20/h-28
             />
           </div>
         </div>
