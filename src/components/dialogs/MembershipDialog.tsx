@@ -104,6 +104,14 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
           </>
         ) : (
           <div className="py-4">
+            <DialogHeader className="mb-4">
+              <DialogTitle className="text-2xl font-bold text-center">
+                Giriş Yap veya Hesap Oluştur
+              </DialogTitle>
+              <DialogDescription className="text-center">
+                Premium üyelik için devam edin
+              </DialogDescription>
+            </DialogHeader>
             <Auth
               supabaseClient={supabase}
               appearance={{
