@@ -4,7 +4,7 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,10 +22,10 @@ const Login = () => {
       <div className="w-full max-w-md bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-8 border-2 border-primary/20">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-[#6E59A5] mb-2">
-            Giriş Yap
+            Premium Üyelik için Kayıt Ol
           </h1>
           <p className="text-muted-foreground">
-            Premium üyelik için giriş yapın veya <a href="/signup" className="text-primary hover:underline">hesap oluşturun</a>
+            Zaten hesabınız var mı? <a href="/login" className="text-primary hover:underline">Giriş yapın</a>
           </p>
         </div>
 
@@ -43,16 +43,16 @@ const Login = () => {
             },
           }}
           providers={[]}
-          view="sign_in"
+          view="sign_up"
           localization={{
             variables: {
-              sign_in: {
+              sign_up: {
                 email_label: 'Email adresi',
                 password_label: 'Şifre',
-                button_label: 'Giriş yap',
-                loading_button_label: 'Giriş yapılıyor...',
-                social_provider_text: 'ile giriş yap',
-                link_text: 'Hesabınız yok mu? Kayıt olun',
+                button_label: 'Hesap oluştur',
+                loading_button_label: 'Kaydediliyor...',
+                social_provider_text: 'ile kayıt ol',
+                link_text: 'Zaten hesabınız var mı? Giriş yapın',
               }
             },
           }}
@@ -62,4 +62,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
