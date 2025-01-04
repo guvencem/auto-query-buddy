@@ -61,31 +61,31 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
         {!showAuthUI ? (
           <>
             <DialogHeader>
-              <DialogTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent text-center">
+              <DialogTitle className="text-2xl font-bold text-center text-gray-900">
                 Premium Üyelik
               </DialogTitle>
-              <DialogDescription className="text-center text-lg text-muted-foreground">
+              <DialogDescription className="text-center text-gray-600">
                 Premium üyelik ile tüm özelliklere erişin
               </DialogDescription>
             </DialogHeader>
 
             <div className="grid gap-6 py-4">
               <div className="space-y-4">
-                <div className="flex items-center gap-4 p-4 rounded-lg border-2 border-primary/20 hover:border-primary/40 transition-colors">
+                <div className="flex items-center gap-4 p-4 rounded-lg border-2 border-primary/20 hover:border-primary/40 transition-colors bg-white">
                   <Crown className="h-8 w-8 text-primary" />
                   <div>
-                    <h3 className="font-semibold text-lg">Premium Özellikler</h3>
-                    <p className="text-muted-foreground">
+                    <h3 className="font-semibold text-lg text-gray-900">Premium Özellikler</h3>
+                    <p className="text-gray-600">
                       Sınırsız erişim ve özel içerikler
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 p-4 rounded-lg border-2 border-primary/20 hover:border-primary/40 transition-colors">
+                <div className="flex items-center gap-4 p-4 rounded-lg border-2 border-primary/20 hover:border-primary/40 transition-colors bg-white">
                   <Crown className="h-8 w-8 text-primary" />
                   <div>
-                    <h3 className="font-semibold text-lg">Öncelikli Destek</h3>
-                    <p className="text-muted-foreground">
+                    <h3 className="font-semibold text-lg text-gray-900">Öncelikli Destek</h3>
+                    <p className="text-gray-600">
                       7/24 öncelikli müşteri desteği
                     </p>
                   </div>
@@ -95,7 +95,7 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
               <button
                 onClick={handlePremiumClick}
                 disabled={loading}
-                className="w-full py-4 px-8 rounded-lg bg-primary hover:bg-primary/90 text-white font-semibold text-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3 px-4 rounded-lg bg-primary hover:bg-primary/90 text-white font-semibold text-base transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
               >
                 {loading ? "İşleniyor..." : "Premium Üye Ol"}
               </button>
