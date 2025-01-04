@@ -58,7 +58,7 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] bg-white/95 backdrop-blur-sm">
+      <DialogContent className="sm:max-w-[425px] bg-white">
         {!showAuthUI ? (
           <>
             <DialogHeader>
@@ -121,8 +121,21 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
                     colors: {
                       brand: '#10B981',
                       brandAccent: '#4ADE80',
+                      inputText: '#000000',
+                      inputBackground: '#FFFFFF',
+                      inputBorder: '#E5E7EB',
+                      inputBorderHover: '#10B981',
+                      inputBorderFocus: '#10B981',
+                      inputPlaceholder: '#6B7280',
                     },
                   },
+                },
+                className: {
+                  container: 'auth-container',
+                  label: 'text-gray-700 font-medium',
+                  button: 'bg-primary hover:bg-primary/90 text-white font-semibold py-2 px-4 rounded-lg transition-colors w-full',
+                  input: 'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50',
+                  anchor: 'text-primary hover:text-primary/80 font-medium',
                 },
               }}
               providers={[]}
@@ -134,7 +147,7 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
                     button_label: 'Giriş yap',
                     loading_button_label: 'Giriş yapılıyor...',
                     link_text: 'Hesabınız yok mu? Kayıt olun',
-                    forgotten_password_label: 'Şifreni mi unuttun?'
+                    password_label_link: 'Şifreni mi unuttun?'
                   },
                   sign_up: {
                     email_label: 'Email adresi',
