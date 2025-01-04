@@ -82,6 +82,11 @@ export const ChatInterface = () => {
     }, 5000);
   };
 
+  const formatMarkdownText = (text: string) => {
+    // Bold başlıkları işle (**text**)
+    return text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-foreground">$1</strong>');
+  };
+
   return (
     <div className="w-full max-w-2xl mx-auto p-4">
       {/* Ad Space Top */}
@@ -130,16 +135,17 @@ export const ChatInterface = () => {
 
       {/* Response Dialog */}
       <Dialog open={showDialog} onOpenChange={handleCloseDialog}>
-        <DialogContent className="sm:max-w-[600px] bg-secondary/50 backdrop-blur-sm border-2 border-primary/20">
+        <DialogContent className="sm:max-w-[600px] bg-white/95 backdrop-blur-sm border-2 border-primary/20">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-foreground">
               Uzman Yanıtı
             </DialogTitle>
           </DialogHeader>
           <div className="mt-4 space-y-4 max-h-[50vh] overflow-y-auto px-2">
-            <p className="text-lg text-foreground/80 whitespace-pre-wrap leading-relaxed">
-              {answer}
-            </p>
+            <p 
+              className="text-lg text-foreground whitespace-pre-wrap leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: formatMarkdownText(answer) }}
+            />
           </div>
           <Button
             onClick={handleCloseDialog}
