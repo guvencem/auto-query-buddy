@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Send, X, Check, Crown } from "lucide-react";
@@ -20,7 +20,18 @@ export const ChatInterface = () => {
   const [showAd, setShowAd] = useState(false);
   const [canCloseAd, setCanCloseAd] = useState(false);
   const [showMembershipDialog, setShowMembershipDialog] = useState(false);
+  const [showRemainingQuestions, setShowRemainingQuestions] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    if (showRemainingQuestions) {
+      const timer = setTimeout(() => {
+        setShowRemainingQuestions(false);
+      }, 10000); // 10 saniye sonra gizle
+
+      return () => clearTimeout(timer);
+    }
+  }, [showRemainingQuestions]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,6 +61,7 @@ export const ChatInterface = () => {
       setShowDialog(true);
       setRemainingQuestions((prev) => Math.max(0, prev - 1));
       setMessage(""); // Clear the input after successful submission
+      setShowRemainingQuestions(true); // Show remaining questions notification
     } catch (error) {
       console.error('Error:', error);
       toast({
@@ -65,7 +77,6 @@ export const ChatInterface = () => {
   const handleCloseDialog = () => {
     setShowDialog(false);
     setShowAd(true);
-    // Start 5-second timer for ad close button
     setTimeout(() => {
       setCanCloseAd(true);
     }, 5000);
@@ -73,12 +84,6 @@ export const ChatInterface = () => {
 
   return (
     <div className="w-full max-w-2xl mx-auto p-4">
-      <div className="mb-4 text-center">
-        <p className="text-sm text-foreground/70">
-          Kalan ücretsiz soru hakkınız: {remainingQuestions}
-        </p>
-      </div>
-      
       {/* Ad Space Top */}
       <div className="w-full h-[100px] bg-secondary/30 rounded-lg mb-4 flex items-center justify-center">
         <p className="text-foreground/40">Reklam Alanı</p>
@@ -91,6 +96,16 @@ export const ChatInterface = () => {
           placeholder="Aracınızla ilgili sorunuzu yazın..."
           className="min-h-[120px] bg-white/80 backdrop-blur-sm border-2 border-primary/20 focus:border-primary rounded-xl transition-all duration-300 shadow-sm hover:shadow-md text-foreground placeholder:text-foreground/50"
         />
+        
+        {/* Remaining Questions Notification */}
+        {showRemainingQuestions && (
+          <div className="animate-fade-in bg-white/80 backdrop-blur-sm p-3 rounded-lg border border-primary/20 text-center">
+            <p className="text-sm text-foreground/70">
+              Kalan ücretsiz soru hakkınız: {remainingQuestions}
+            </p>
+          </div>
+        )}
+
         <Button
           type="submit"
           className="btn-neon w-full"
