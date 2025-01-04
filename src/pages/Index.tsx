@@ -2,17 +2,9 @@ import { CookieConsent } from "@/components/CookieConsent";
 import { ChatInterface } from "@/components/ChatInterface";
 import { Button } from "@/components/ui/button";
 import { LogIn, Crown } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { useState } from "react";
-import { Auth } from "@supabase/auth-ui-react";
-import { supabase } from "@/integrations/supabase/client";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { MembershipDialog } from "@/components/dialogs/MembershipDialog";
+import { LoginDialog } from "@/components/dialogs/LoginDialog";
 
 const Index = () => {
   const [showLoginDialog, setShowLoginDialog] = useState(false);
@@ -65,50 +57,10 @@ const Index = () => {
       </main>
 
       {/* Login Dialog */}
-      <Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
-        <DialogContent className="sm:max-w-[400px] p-0 bg-secondary/50 backdrop-blur-sm">
-          <DialogHeader className="px-6 pt-6">
-            <DialogTitle className="text-2xl font-bold text-center text-[#6E59A5]">Giriş Yap</DialogTitle>
-          </DialogHeader>
-          <div className="px-6 pb-6">
-            <Auth
-              supabaseClient={supabase}
-              appearance={{
-                theme: ThemeSupa,
-                variables: {
-                  default: {
-                    colors: {
-                      brand: '#10B981',
-                      brandAccent: '#4ADE80',
-                    },
-                  },
-                },
-              }}
-              providers={[]}
-              localization={{
-                variables: {
-                  sign_in: {
-                    email_label: 'Email adresi',
-                    password_label: 'Şifre',
-                    button_label: 'Giriş yap',
-                    loading_button_label: 'Giriş yapılıyor...',
-                    social_provider_text: 'ile giriş yap',
-                    link_text: 'Zaten hesabınız var mı? Giriş yapın',
-                  },
-                  sign_up: {
-                    email_label: 'Email adresi',
-                    password_label: 'Şifre',
-                    button_label: 'Hesap oluştur',
-                    loading_button_label: 'Kaydediliyor...',
-                    social_provider_text: 'ile kayıt ol',
-                    link_text: 'Hesabınız yok mu? Kayıt olun',
-                  },
-                },
-              }}
-            />
-          </div>
-        </DialogContent>
-      </Dialog>
+      <LoginDialog 
+        open={showLoginDialog}
+        onOpenChange={setShowLoginDialog}
+      />
 
       {/* Membership Dialog */}
       <MembershipDialog 
