@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 export const ChatInterface = () => {
   const [message, setMessage] = useState("");
@@ -22,10 +22,18 @@ export const ChatInterface = () => {
         body: { question: message }
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw error;
+      }
+
+      if (!data || !data.answer) {
+        throw new Error('No answer received from the assistant');
+      }
 
       setAnswer(data.answer);
       setRemainingQuestions((prev) => Math.max(0, prev - 1));
+      setMessage(""); // Clear the input after successful submission
     } catch (error) {
       console.error('Error:', error);
       toast({
