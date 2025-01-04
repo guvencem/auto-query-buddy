@@ -83,6 +83,7 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
                 sign_up: {
                   email_label: 'Email adresi',
                   password_label: 'Şifre',
+                  password_label_confirmation: 'Şifreyi tekrar girin',
                   button_label: 'Kayıt ol',
                   loading_button_label: 'Kaydediliyor...',
                   link_text: 'Zaten hesabınız var mı? Giriş yapın',
@@ -90,6 +91,15 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
               },
             }}
             providers={[]}
+            options={{
+              passwordCheck: true,
+              passwordPolicy: {
+                minLength: 8,
+                requireNumbers: true,
+                requireSpecialCharacters: true,
+                requireUppercase: true,
+              },
+            }}
           />
         </div>
       </DialogContent>
