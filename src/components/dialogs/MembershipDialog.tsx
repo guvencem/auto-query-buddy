@@ -135,6 +135,7 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
                     loading_button_label: 'Giriş yapılıyor...',
                     social_provider_text: 'ile giriş yap',
                     link_text: 'Hesabınız yok mu? Kayıt olun',
+                    password_label_link: 'Şifreni mi unuttun?',
                   },
                   sign_up: {
                     email_label: 'Email adresi',
@@ -143,7 +144,14 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
                     loading_button_label: 'Kaydediliyor...',
                     social_provider_text: 'ile kayıt ol',
                     link_text: 'Zaten hesabınız var mı? Giriş yapın',
-                  }
+                  },
+                  forgotten_password: {
+                    email_label: 'Email adresi',
+                    password_label: 'Şifre',
+                    button_label: 'Şifremi sıfırla',
+                    loading_button_label: 'Sıfırlama bağlantısı gönderiliyor...',
+                    link_text: 'Giriş sayfasına dön',
+                  },
                 },
               }}
               view="sign_in"
