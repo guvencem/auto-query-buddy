@@ -83,11 +83,11 @@ export const ChatInterface = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Aracınızla ilgili sorunuzu yazın..."
-          className="min-h-[120px]"
+          className="min-h-[120px] bg-white/80 backdrop-blur-sm border-2 border-blue-100 focus:border-blue-300 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md"
         />
         <Button
           type="submit"
-          className="w-full"
+          className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-3 rounded-xl transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           disabled={!message.trim() || remainingQuestions === 0 || isLoading}
         >
           {isLoading ? (
@@ -109,33 +109,39 @@ export const ChatInterface = () => {
 
       {/* Response Dialog */}
       <Dialog open={showDialog} onOpenChange={handleCloseDialog}>
-        <DialogContent className="sm:max-w-[600px]">
+        <DialogContent className="sm:max-w-[600px] w-[95%] mx-auto bg-gradient-to-b from-white to-blue-50 p-6 rounded-2xl shadow-xl border-2 border-blue-100">
           <DialogHeader>
-            <DialogTitle>Yanıt</DialogTitle>
+            <DialogTitle className="text-2xl font-bold text-blue-900 mb-4">Uzman Yanıtı</DialogTitle>
           </DialogHeader>
           <div className="mt-4">
-            <p className="text-gray-700 whitespace-pre-wrap">{answer}</p>
+            <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">{answer}</p>
           </div>
+          <Button
+            onClick={handleCloseDialog}
+            className="mt-6 w-full bg-gradient-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 text-white font-medium py-2 rounded-xl transform transition-all duration-300 hover:scale-[1.02]"
+          >
+            Anladım
+          </Button>
         </DialogContent>
       </Dialog>
 
       {/* Advertisement Dialog */}
       {showAd && (
-        <div className="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 w-[300px] animate-fadeIn">
+        <div className="fixed bottom-4 right-4 bg-white rounded-2xl shadow-2xl p-4 w-[300px] animate-fadeIn border-2 border-blue-100">
           <div className="relative">
             {canCloseAd && (
               <button
                 onClick={() => setShowAd(false)}
-                className="absolute -top-2 -right-2 bg-gray-100 rounded-full p-1 hover:bg-gray-200 transition-colors"
+                className="absolute -top-2 -right-2 bg-white rounded-full p-2 hover:bg-gray-100 transition-colors shadow-lg border border-gray-200"
               >
-                <X className="w-4 h-4" />
+                <X className="w-4 h-4 text-gray-600" />
               </button>
             )}
-            <div className="h-[200px] bg-gray-100 rounded flex items-center justify-center">
-              <p className="text-gray-400">Reklam İçeriği</p>
+            <div className="h-[200px] bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl flex items-center justify-center border border-blue-100">
+              <p className="text-gray-600 font-medium">Reklam İçeriği</p>
             </div>
             {!canCloseAd && (
-              <p className="text-xs text-gray-500 mt-2 text-center">
+              <p className="text-sm text-gray-600 mt-3 text-center bg-blue-50 py-2 px-3 rounded-lg">
                 Reklamı 5 saniye sonra kapatabilirsiniz
               </p>
             )}
