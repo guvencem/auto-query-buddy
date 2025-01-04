@@ -12,7 +12,7 @@ const Index = () => {
             <img 
               src="/lovable-uploads/0c7dfd7d-d317-4b51-975c-b77e96d1423b.png" 
               alt="Araba Akademisi Logo" 
-              className="h-32 md:h-40 hover:drop-shadow-xl transition-all"
+              className="h-64 md:h-80 hover:drop-shadow-xl transition-all" // Doubled the height from h-32 to h-64 and h-40 to h-80
             />
           </div>
         </div>
