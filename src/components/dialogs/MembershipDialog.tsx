@@ -39,7 +39,6 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
         return;
       }
 
-      // Handle premium subscription logic here for logged-in users
       toast({
         title: "Premium Üyelik",
         description: "Premium üyelik işlemi başlatılıyor...",
@@ -105,10 +104,10 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
         ) : (
           <div className="py-4">
             <DialogHeader className="mb-4">
-              <DialogTitle className="text-2xl font-bold text-center">
+              <DialogTitle className="text-2xl font-bold text-center text-gray-900">
                 Giriş Yap veya Hesap Oluştur
               </DialogTitle>
-              <DialogDescription className="text-center">
+              <DialogDescription className="text-center text-gray-600">
                 Premium üyelik için devam edin
               </DialogDescription>
             </DialogHeader>
@@ -121,21 +120,23 @@ export function MembershipDialog({ open, onOpenChange }: MembershipDialogProps) 
                     colors: {
                       brand: '#10B981',
                       brandAccent: '#4ADE80',
-                      inputText: '#000000',
+                      inputText: '#1A1F2C',
                       inputBackground: '#FFFFFF',
-                      inputBorder: '#E5E7EB',
-                      inputBorderHover: '#10B981',
+                      inputBorder: '#D1D5DB',
                       inputBorderFocus: '#10B981',
+                      inputBorderHover: '#10B981',
                       inputPlaceholder: '#6B7280',
                     },
                   },
                 },
                 className: {
                   container: 'auth-container',
-                  label: 'text-gray-700 font-medium',
-                  button: 'bg-primary hover:bg-primary/90 text-white font-semibold py-2 px-4 rounded-lg transition-colors w-full',
-                  input: 'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50',
+                  label: 'text-gray-900 font-medium mb-1 block',
+                  button: 'bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-4 rounded-lg transition-colors w-full shadow-sm',
+                  input: 'w-full px-3 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 bg-white text-gray-900 text-base',
                   anchor: 'text-primary hover:text-primary/80 font-medium',
+                  divider: 'bg-gray-200',
+                  message: 'text-red-600 text-sm',
                 },
               }}
               providers={[]}
