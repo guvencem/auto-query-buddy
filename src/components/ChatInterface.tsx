@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Send, X } from "lucide-react";
+import { Send, X, Check, Crown } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -19,12 +19,18 @@ export const ChatInterface = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [showAd, setShowAd] = useState(false);
   const [canCloseAd, setCanCloseAd] = useState(false);
+  const [showMembershipDialog, setShowMembershipDialog] = useState(false);
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim() || isLoading) return;
     
+    if (remainingQuestions === 0) {
+      setShowMembershipDialog(true);
+      return;
+    }
+
     setIsLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke('generate-car-advice', {
@@ -88,7 +94,7 @@ export const ChatInterface = () => {
         <Button
           type="submit"
           className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-3 rounded-xl transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-          disabled={!message.trim() || remainingQuestions === 0 || isLoading}
+          disabled={!message.trim() || isLoading}
         >
           {isLoading ? (
             <span className="flex items-center">
@@ -126,6 +132,62 @@ export const ChatInterface = () => {
           >
             Anladım
           </Button>
+        </DialogContent>
+      </Dialog>
+
+      {/* Membership Dialog */}
+      <Dialog open={showMembershipDialog} onOpenChange={setShowMembershipDialog}>
+        <DialogContent className="sm:relative sm:inset-auto max-w-[95vw] sm:max-w-[500px] mx-auto bg-gradient-to-br from-indigo-50 via-white to-blue-50 p-6 rounded-2xl shadow-2xl border-2 border-blue-200">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-center text-indigo-900 flex items-center justify-center gap-2">
+              <Crown className="w-6 h-6 text-yellow-500" />
+              Premium Üyelik
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="mt-6 space-y-6">
+            <div className="text-center">
+              <p className="text-lg text-gray-700 mb-4">
+                Ücretsiz soru hakkınız doldu. Premium üyelik ile sınırsız soru sorabilirsiniz!
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <div className="bg-white/60 p-4 rounded-xl shadow-sm border border-blue-100">
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <p className="text-gray-700">Sınırsız soru sorma hakkı</p>
+                </div>
+              </div>
+              <div className="bg-white/60 p-4 rounded-xl shadow-sm border border-blue-100">
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <p className="text-gray-700">Öncelikli yanıt alma</p>
+                </div>
+              </div>
+              <div className="bg-white/60 p-4 rounded-xl shadow-sm border border-blue-100">
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <p className="text-gray-700">Reklamsız deneyim</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-4">
+              <Button
+                onClick={() => setShowMembershipDialog(false)}
+                className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-medium py-6 rounded-xl transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg text-lg"
+              >
+                Premium Üyeliğe Geç
+              </Button>
+              <button
+                onClick={() => setShowMembershipDialog(false)}
+                className="w-full mt-4 text-gray-500 hover:text-gray-700 transition-colors text-sm"
+              >
+                Belki daha sonra
+              </button>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
 
