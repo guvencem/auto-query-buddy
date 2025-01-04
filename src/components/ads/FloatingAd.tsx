@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import Script from 'next/script';
+import React from "react";
 
 interface FloatingAdProps {
   show: boolean;
@@ -12,6 +12,15 @@ export const FloatingAd = ({ show, onClose, canClose }: FloatingAdProps) => {
 
   // Google AdSense reklam birimi ID'si - kendi AdSense kodunuzla değiştirin
   const adUnitId = "ca-pub-XXXXXXXXXXXXXXXX";
+
+  // AdSense kodunu yükle
+  React.useEffect(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (err) {
+      console.error('AdSense yüklenirken hata:', err);
+    }
+  }, []);
 
   return (
     <div className="fixed bottom-4 right-4 bg-secondary/50 backdrop-blur-sm rounded-2xl shadow-2xl p-4 w-[90vw] sm:w-[300px] animate-fadeIn border-2 border-primary/20">
@@ -34,11 +43,6 @@ export const FloatingAd = ({ show, onClose, canClose }: FloatingAdProps) => {
             data-ad-format="auto"
             data-full-width-responsive="true"
           />
-          <Script id="floating-adsbygoogle" strategy="afterInteractive">
-            {`
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            `}
-          </Script>
         </div>
 
         {!canClose && (

@@ -1,5 +1,3 @@
-import Script from 'next/script';
-
 interface AdSpaceProps {
   position: "top" | "bottom";
 }
@@ -7,6 +5,15 @@ interface AdSpaceProps {
 export const AdSpace = ({ position }: AdSpaceProps) => {
   // Google AdSense reklam birimi ID'si - kendi AdSense kodunuzla değiştirin
   const adUnitId = "ca-pub-XXXXXXXXXXXXXXXX";
+
+  // AdSense kodunu yükle
+  React.useEffect(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (err) {
+      console.error('AdSense yüklenirken hata:', err);
+    }
+  }, []);
 
   return (
     <div className={`w-full min-h-[100px] ${position === "bottom" ? "mt-4" : "mb-4"}`}>
@@ -18,11 +25,6 @@ export const AdSpace = ({ position }: AdSpaceProps) => {
         data-ad-format="auto"
         data-full-width-responsive="true"
       />
-      <Script id="adsbygoogle" strategy="afterInteractive">
-        {`
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        `}
-      </Script>
     </div>
   );
 };
