@@ -28,8 +28,8 @@ export const FloatingAd = ({ show, onClose, canClose, remainingTime }: FloatingA
   }, []);
 
   return (
-    <div className="fixed bottom-4 right-4 bg-secondary/50 backdrop-blur-sm rounded-2xl shadow-2xl p-4 w-[90vw] sm:w-[300px] animate-fadeIn border-2 border-primary/20">
-      <div className="relative">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+      <div className="relative bg-secondary/50 backdrop-blur-sm rounded-2xl shadow-2xl p-4 w-[90vw] sm:w-[500px] animate-fadeIn border-2 border-primary/20">
         {canClose && (
           <button
             onClick={onClose}
@@ -39,7 +39,7 @@ export const FloatingAd = ({ show, onClose, canClose, remainingTime }: FloatingA
           </button>
         )}
         
-        <div className="min-h-[200px]">
+        <div className="min-h-[300px]">
           <ins
             className="adsbygoogle"
             style={{ display: "block" }}

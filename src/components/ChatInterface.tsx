@@ -17,7 +17,7 @@ export const ChatInterface = () => {
   const [showAd, setShowAd] = useState(false);
   const [canCloseAd, setCanCloseAd] = useState(false);
   const [showRemainingQuestions, setShowRemainingQuestions] = useState(false);
-  const [adTimer, setAdTimer] = useState(60); // 60 saniye için sayaç
+  const [adTimer, setAdTimer] = useState(15); // 15 saniye için sayaç
   const { toast } = useToast();
 
   useEffect(() => {
@@ -38,10 +38,7 @@ export const ChatInterface = () => {
         setAdTimer((prev) => prev - 1);
       }, 1000);
     } else if (adTimer === 0) {
-      setShowAd(false);
-      setAdTimer(60); // Sayacı sıfırla
       setCanCloseAd(true);
-      setShowDialog(true); // Reklam bittiğinde cevabı göster
     }
     return () => {
       if (timer) clearInterval(timer);
@@ -72,7 +69,8 @@ export const ChatInterface = () => {
       if (remainingQuestions < 3) { // İlk sorudan sonraki tüm sorular için
         setShowAd(true);
         setCanCloseAd(false);
-        setAdTimer(60);
+        setAdTimer(15);
+        setShowDialog(true); // Yanıt penceresini göster ama reklam önünde olacak
       } else {
         setShowDialog(true);
       }
@@ -94,6 +92,9 @@ export const ChatInterface = () => {
 
   const handleCloseDialog = () => {
     setShowDialog(false);
+    setShowAd(false);
+    setAdTimer(15);
+    setCanCloseAd(false);
   };
 
   return (
@@ -144,17 +145,19 @@ export const ChatInterface = () => {
         answer={answer}
       />
 
-      <FloatingAd
-        show={showAd}
-        onClose={() => {
-          if (canCloseAd) {
-            setShowAd(false);
-            setAdTimer(60);
-          }
-        }}
-        canClose={canCloseAd}
-        remainingTime={adTimer}
-      />
+      {showAd && showDialog && (
+        <FloatingAd
+          show={showAd}
+          onClose={() => {
+            if (canCloseAd) {
+              setShowAd(false);
+              setAdTimer(15);
+            }
+          }}
+          canClose={canCloseAd}
+          remainingTime={adTimer}
+        />
+      )}
 
       <AdSpace position="bottom" />
     </div>
