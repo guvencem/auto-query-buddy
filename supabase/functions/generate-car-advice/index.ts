@@ -19,68 +19,31 @@ serve(async (req) => {
       throw new Error('OpenAI API key is not configured');
     }
 
-    const formData = await req.formData();
-    const question = formData.get('question') as string;
-    const file = formData.get('file') as File | null;
+    const { question } = await req.json();
     
     console.log('Received question:', question);
-    console.log('Received file:', file?.name);
-
-    let messages = [
-      {
-        role: 'system',
-        content: 'Sen bir araba uzmanısın. Kullanıcıların arabaları hakkında sorduğu her türlü soruya detaylı ve anlaşılır bir şekilde cevap vermelisin. Cevaplarını Türkçe olarak ver.'
-      }
-    ];
-
-    if (file) {
-      try {
-        // Read the file as ArrayBuffer
-        const arrayBuffer = await file.arrayBuffer();
-        // Convert ArrayBuffer to Uint8Array
-        const uint8Array = new Uint8Array(arrayBuffer);
-        // Convert Uint8Array to base64
-        const base64String = btoa(String.fromCharCode.apply(null, uint8Array));
-        
-        console.log('File processed successfully, adding to messages');
-        
-        messages.push({
-          role: 'user',
-          content: [
-            { type: 'text', text: question },
-            {
-              type: 'image_url',
-              image_url: {
-                url: `data:${file.type};base64,${base64String}`
-              }
-            }
-          ]
-        });
-      } catch (error) {
-        console.error('Error processing file:', error);
-        throw new Error(`Failed to process image file: ${error.message}`);
-      }
-    } else {
-      messages.push({
-        role: 'user',
-        content: question
-      });
-    }
-
-    console.log('Sending request to OpenAI');
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${openAIApiKey}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4-vision-preview',
-        messages,
+        model: 'gpt-4o-mini',
+        messages: [
+          {
+            role: 'system',
+            content: 'Sen bir araba uzmanısın. Kullanıcıların arabaları hakkında sorduğu her türlü soruya detaylı ve anlaşılır bir şekilde cevap vermelisin. Cevaplarını Türkçe olarak ver ve önemli noktaları bold (**text**) formatında vurgula.'
+          },
+          {
+            role: 'user',
+            content: question
+          }
+        ],
         temperature: 0.7,
         max_tokens: 1000
-      })
+      }),
     });
 
     if (!response.ok) {
