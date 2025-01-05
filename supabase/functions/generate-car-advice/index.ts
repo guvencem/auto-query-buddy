@@ -34,22 +34,28 @@ serve(async (req) => {
     ];
 
     if (file) {
-      const fileBuffer = await file.arrayBuffer();
-      const base64Data = btoa(String.fromCharCode(...new Uint8Array(fileBuffer)));
-      
-      messages.push({
-        role: 'user',
-        content: [
-          {
-            type: 'text',
-            text: question
-          },
-          {
-            type: 'image_url',
-            image_url: `data:${file.type};base64,${base64Data}`
-          }
-        ]
-      });
+      try {
+        const fileBuffer = await file.arrayBuffer();
+        const base64Data = btoa(String.fromCharCode(...new Uint8Array(fileBuffer)));
+        
+        messages.push({
+          role: 'user',
+          content: [
+            { type: 'text', text: question },
+            {
+              type: 'image_url',
+              image_url: {
+                url: `data:${file.type};base64,${base64Data}`
+              }
+            }
+          ]
+        });
+        
+        console.log('Successfully processed image and added to messages');
+      } catch (error) {
+        console.error('Error processing file:', error);
+        throw new Error('Failed to process image file');
+      }
     } else {
       messages.push({
         role: 'user',
@@ -57,7 +63,7 @@ serve(async (req) => {
       });
     }
 
-    console.log('Sending request to OpenAI with messages:', messages);
+    console.log('Sending request to OpenAI with messages structure');
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -66,7 +72,7 @@ serve(async (req) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4-vision-preview',
         messages,
         temperature: 0.7,
         max_tokens: 1000
@@ -80,7 +86,7 @@ serve(async (req) => {
     }
 
     const data = await response.json();
-    console.log('OpenAI response:', data);
+    console.log('Received response from OpenAI:', data);
 
     if (!data.choices || !data.choices[0] || !data.choices[0].message) {
       throw new Error('Invalid response format from OpenAI');
