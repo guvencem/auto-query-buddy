@@ -9,7 +9,6 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
@@ -22,6 +21,32 @@ serve(async (req) => {
     const { question } = await req.json();
     console.log('Received question:', question);
 
+    // Extract file URL if present
+    const fileMatch = question.match(/Ek dosya: (.*?)(\n|$)/);
+    const fileUrl = fileMatch ? fileMatch[1] : null;
+
+    let messages = [
+      {
+        role: 'system',
+        content: 'Sen bir araba uzmanısın. Kullanıcıların arabaları hakkında sorduğu her türlü soruya detaylı ve anlaşılır bir şekilde cevap vermelisin. Cevaplarını Türkçe olarak ver.'
+      }
+    ];
+
+    if (fileUrl) {
+      messages.push({
+        role: 'user',
+        content: [
+          { type: 'text', text: question.replace(/Ek dosya: .*?(\n|$)/, '') },
+          { type: 'image_url', image_url: fileUrl }
+        ]
+      });
+    } else {
+      messages.push({
+        role: 'user',
+        content: question
+      });
+    }
+
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -30,16 +55,7 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         model: 'gpt-4o-mini',
-        messages: [
-          {
-            role: 'system',
-            content: 'Sen bir araba uzmanısın. Kullanıcıların arabaları hakkında sorduğu her türlü soruya detaylı ve anlaşılır bir şekilde cevap vermelisin. Cevaplarını Türkçe olarak ver.'
-          },
-          {
-            role: 'user',
-            content: question
-          }
-        ],
+        messages,
         temperature: 0.7,
       })
     });
