@@ -13,9 +13,36 @@
     <link rel="apple-touch-icon" href="/lovable-uploads/0c7dfd7d-d317-4b51-975c-b77e96d1423b.png" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1468951974661165" crossorigin="anonymous"></script>
+    <style>
+      #initial-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(to bottom, #f5f3ff, #e9e4ff);
+        z-index: 9999;
+      }
+      #initial-loader img {
+        width: 100px;
+        height: 100px;
+        animation: pulse 1.5s infinite;
+      }
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+      }
+    </style>
   </head>
 
   <body>
+    <div id="initial-loader">
+      <img src="/lovable-uploads/0c7dfd7d-d317-4b51-975c-b77e96d1423b.png" alt="Yükleniyor..." />
+    </div>
     <div id="root"></div>
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
@@ -31,6 +58,20 @@
             });
         });
       }
+
+      // React uygulaması yüklendiğinde yükleme ekranını kaldır
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const loader = document.getElementById('initial-loader');
+          if (loader) {
+            loader.style.opacity = '0';
+            loader.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+              loader.style.display = 'none';
+            }, 500);
+          }
+        }, 500);
+      });
     </script>
   </body>
 </html>
