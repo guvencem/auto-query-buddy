@@ -14,7 +14,7 @@ serve(async (req) => {
   try {
     const hf = new HfInference(Deno.env.get('HUGGING_FACE_ACCESS_TOKEN'))
 
-    const prompt = "A cute 3D robot assistant, white and blue colors, friendly face, minimalist design, high quality render, clean background"
+    const prompt = "A cute 3D robot car mechanic apprentice, wearing a purple and neon green mechanic uniform, friendly face with glowing eyes, holding a wrench, minimalist design, transparent background, high quality render, clean design, white and purple color scheme with neon green accents, similar to a Pixar character"
 
     const image = await hf.textToImage({
       inputs: prompt,
