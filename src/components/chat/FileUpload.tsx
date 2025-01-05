@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 interface FileUploadProps {
-  onFileUpload: (url: string) => void;
+  onFileUpload: (file: File) => void;
 }
 
 const SUPPORTED_FORMATS = [
@@ -13,10 +12,6 @@ const SUPPORTED_FORMATS = [
   'image/png',
   'image/gif',
   'image/webp',
-  'application/pdf',
-  'text/plain',
-  'text/csv',
-  'application/json',
 ];
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
@@ -32,7 +27,7 @@ export const FileUpload = ({ onFileUpload }: FileUploadProps) => {
     if (!SUPPORTED_FORMATS.includes(file.type)) {
       toast({
         title: "Desteklenmeyen Dosya Formatı",
-        description: "Lütfen desteklenen bir dosya formatı seçin (JPG, PNG, GIF, WEBP, PDF, TXT, CSV, JSON)",
+        description: "Lütfen desteklenen bir dosya formatı seçin (JPG, PNG, GIF, WEBP)",
         variant: "destructive",
       });
       return;
@@ -49,20 +44,7 @@ export const FileUpload = ({ onFileUpload }: FileUploadProps) => {
 
     setIsUploading(true);
     try {
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${crypto.randomUUID()}.${fileExt}`;
-
-      const { data, error } = await supabase.storage
-        .from('uploads')
-        .upload(fileName, file);
-
-      if (error) throw error;
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('uploads')
-        .getPublicUrl(fileName);
-
-      onFileUpload(publicUrl);
+      onFileUpload(file);
       
       toast({
         title: "Başarılı",

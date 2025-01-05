@@ -10,6 +10,7 @@ import { MessageInput } from "./chat/MessageInput";
 
 export const ChatInterface = () => {
   const [message, setMessage] = useState("");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [remainingQuestions, setRemainingQuestions] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
   const [answer, setAnswer] = useState("");
@@ -65,8 +66,14 @@ export const ChatInterface = () => {
     
     setIsLoading(true);
     try {
+      const formData = new FormData();
+      formData.append('question', message);
+      if (selectedFile) {
+        formData.append('file', selectedFile);
+      }
+
       const { data, error } = await supabase.functions.invoke('generate-car-advice', {
-        body: { question: message }
+        body: formData
       });
 
       if (error) {
@@ -97,6 +104,7 @@ export const ChatInterface = () => {
       }
       
       setMessage("");
+      setSelectedFile(null);
       setShowRemainingQuestions(true);
     } catch (error) {
       console.error('Error:', error);
@@ -136,6 +144,7 @@ export const ChatInterface = () => {
         onSubmit={handleSubmit}
         remainingQuestions={remainingQuestions}
         showRemainingQuestions={showRemainingQuestions}
+        onFileUpload={(file) => setSelectedFile(file)}
       />
 
       <AdSpace position="bottom" />

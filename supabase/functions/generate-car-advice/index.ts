@@ -18,12 +18,12 @@ serve(async (req) => {
       throw new Error('OpenAI API key is not configured');
     }
 
-    const { question } = await req.json();
+    const formData = await req.formData();
+    const question = formData.get('question') as string;
+    const file = formData.get('file') as File;
+    
     console.log('Received question:', question);
-
-    // Extract file URL if present
-    const fileMatch = question.match(/Ek dosya: (.*?)(\n|$)/);
-    const fileUrl = fileMatch ? fileMatch[1] : null;
+    console.log('Received file:', file?.name);
 
     let messages = [
       {
@@ -32,12 +32,21 @@ serve(async (req) => {
       }
     ];
 
-    if (fileUrl) {
+    if (file) {
+      const fileBuffer = await file.arrayBuffer();
+      const base64Data = btoa(String.fromCharCode(...new Uint8Array(fileBuffer)));
+      
       messages.push({
         role: 'user',
         content: [
-          { type: 'text', text: question.replace(/Ek dosya: .*?(\n|$)/, '') },
-          { type: 'image_url', image_url: fileUrl }
+          {
+            type: 'text',
+            text: question
+          },
+          {
+            type: 'image_url',
+            image_url: `data:${file.type};base64,${base64Data}`
+          }
         ]
       });
     } else {
