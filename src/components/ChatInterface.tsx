@@ -33,15 +33,18 @@ export const ChatInterface = () => {
   }, [showRemainingQuestions]);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (showAd && !canCloseAd && adTimer > 0) {
+    let timer: NodeJS.Timeout | null = null;
+    
+    if (showAd && !canCloseAd) {
       timer = setInterval(() => {
-        setAdTimer((prev) => {
-          if (prev <= 1) {
+        setAdTimer((prevTimer) => {
+          const newTimer = prevTimer - 1;
+          if (newTimer <= 0) {
             setCanCloseAd(true);
+            if (timer) clearInterval(timer);
             return 0;
           }
-          return prev - 1;
+          return newTimer;
         });
       }, 1000);
     }
@@ -49,7 +52,7 @@ export const ChatInterface = () => {
     return () => {
       if (timer) clearInterval(timer);
     };
-  }, [showAd, canCloseAd, adTimer]);
+  }, [showAd, canCloseAd]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -177,6 +180,7 @@ export const ChatInterface = () => {
             if (canCloseAd) {
               setShowAd(false);
               setAdTimer(15);
+              window.location.reload();
             }
           }}
           canClose={canCloseAd}
