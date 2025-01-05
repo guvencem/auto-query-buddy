@@ -1,6 +1,5 @@
 import React from "react";
 
-// Add type definition for window.adsbygoogle
 declare global {
   interface Window {
     adsbygoogle: any[];
@@ -12,10 +11,8 @@ interface AdSpaceProps {
 }
 
 export const AdSpace = ({ position }: AdSpaceProps) => {
-  // Google AdSense reklam birimi ID'si - kendi AdSense kodunuzla değiştirin
   const adUnitId = "ca-pub-XXXXXXXXXXXXXXXX";
 
-  // AdSense kodunu yükle
   React.useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -25,9 +22,26 @@ export const AdSpace = ({ position }: AdSpaceProps) => {
   }, []);
 
   return (
-    <div className={`w-full min-h-[100px] ${position === "bottom" ? "mt-4" : "mb-4"}`}>
+    <div 
+      className={`
+        w-full min-h-[100px] 
+        ${position === "bottom" ? "mt-8" : "mb-8"}
+        bg-white/50 backdrop-blur-sm
+        border-2 border-primary/20
+        rounded-xl
+        flex items-center justify-center
+        transition-all duration-300
+        hover:shadow-lg
+        relative
+      `}
+    >
+      {/* Placeholder content until AdSense is active */}
+      <div className="text-primary/50 text-sm font-medium">
+        Reklam Alanı ({position === "top" ? "Üst" : "Alt"})
+      </div>
+      
       <ins
-        className="adsbygoogle"
+        className="adsbygoogle absolute inset-0"
         style={{ display: "block" }}
         data-ad-client={adUnitId}
         data-ad-slot="XXXXXXXXXX"
