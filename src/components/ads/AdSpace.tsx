@@ -11,7 +11,7 @@ interface AdSpaceProps {
 }
 
 export const AdSpace = ({ position }: AdSpaceProps) => {
-  const adUnitId = "ca-pub-XXXXXXXXXXXXXXXX";
+  const adUnitId = "BURAYA-ADSENSE-AD-UNIT-ID-YAZIN"; // AdSense reklam birimi ID'nizi buraya yazın
 
   React.useEffect(() => {
     try {
@@ -33,18 +33,14 @@ export const AdSpace = ({ position }: AdSpaceProps) => {
         transition-all duration-300
         hover:shadow-lg
         relative
+        overflow-hidden
       `}
     >
-      {/* Placeholder content until AdSense is active */}
-      <div className="text-primary/50 text-sm font-medium">
-        Reklam Alanı ({position === "top" ? "Üst" : "Alt"})
-      </div>
-      
       <ins
         className="adsbygoogle absolute inset-0"
         style={{ display: "block" }}
         data-ad-client={adUnitId}
-        data-ad-slot="XXXXXXXXXX"
+        data-ad-slot="BURAYA-ADSENSE-AD-SLOT-YAZIN"
         data-ad-format="auto"
         data-full-width-responsive="true"
       />
