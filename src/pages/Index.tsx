@@ -6,53 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
-  const [robotImage, setRobotImage] = useState<string>("/placeholder.svg");
   const [isLoadingImage, setIsLoadingImage] = useState(false);
   const { toast } = useToast();
-
-  useEffect(() => {
-    const generateRobotImage = async () => {
-      setIsLoadingImage(true);
-      try {
-        const { data, error } = await supabase.functions.invoke('generate-robot-image');
-        
-        if (error) {
-          console.error('Error generating robot image:', error);
-          const errorDetails = JSON.parse(error.message);
-          
-          if (errorDetails.retryAfter) {
-            toast({
-              title: "Lütfen bekleyin",
-              description: "Robot resmi oluşturma limitine ulaşıldı. 1 dakika sonra tekrar deneyin.",
-              variant: "destructive",
-            });
-          } else {
-            toast({
-              title: "Hata",
-              description: "Robot resmi oluşturulurken bir hata oluştu. Lütfen sayfayı yenileyin.",
-              variant: "destructive",
-            });
-          }
-          return;
-        }
-
-        if (data?.image) {
-          setRobotImage(data.image);
-        }
-      } catch (error) {
-        console.error('Error generating robot image:', error);
-        toast({
-          title: "Hata",
-          description: "Robot resmi oluşturulurken bir hata oluştu. Lütfen sayfayı yenileyin.",
-          variant: "destructive",
-        });
-      } finally {
-        setIsLoadingImage(false);
-      }
-    };
-
-    generateRobotImage();
-  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background font-quicksand">
@@ -66,15 +21,6 @@ const Index = () => {
               className="h-20 md:h-28 hover:drop-shadow-xl transition-all"
             />
           </div>
-          {isLoadingImage ? (
-            <div className="w-16 h-16 rounded-full bg-gray-200 animate-pulse" />
-          ) : (
-            <img 
-              src={robotImage}
-              alt="Robot Assistant"
-              className="w-16 h-16 animate-bounce rounded-full shadow-lg"
-            />
-          )}
         </div>
       </header>
 
@@ -85,15 +31,6 @@ const Index = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-[#6E59A5] hover:text-[#8A6FD3] transition-colors">
               Araç Sorunlarına Hızlı ve Kolay Çözüm!
             </h2>
-            {isLoadingImage ? (
-              <div className="w-8 h-8 rounded-full bg-gray-200 animate-pulse" />
-            ) : (
-              <img 
-                src={robotImage}
-                alt="Robot Assistant"
-                className="w-8 h-8 rounded-full shadow-md"
-              />
-            )}
           </div>
           <p className="text-[#7E69AB] text-lg max-w-2xl mx-auto hover:text-[#9A85C7] transition-colors">
             Araç marka, model ve yaşadığın sorunu buraya yaz, yapay zeka destekli çözümümüz sana saniyeler içinde yardımcı olsun!
