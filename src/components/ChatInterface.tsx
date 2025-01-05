@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { ResponseDialog } from "./dialogs/ResponseDialog";
 import { RenewalDialog } from "./dialogs/RenewalDialog";
+import { AddToHomeScreenDialog } from "./dialogs/AddToHomeScreenDialog";
 import { AdSpace } from "./ads/AdSpace";
 import { FloatingAd } from "./ads/FloatingAd";
 
@@ -20,6 +21,7 @@ export const ChatInterface = () => {
   const [showRemainingQuestions, setShowRemainingQuestions] = useState(false);
   const [adTimer, setAdTimer] = useState(15);
   const [showRenewalDialog, setShowRenewalDialog] = useState(false);
+  const [showAddToHomeScreen, setShowAddToHomeScreen] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -80,6 +82,13 @@ export const ChatInterface = () => {
 
       setAnswer(data.answer);
       
+      const newRemainingQuestions = remainingQuestions - 1;
+      setRemainingQuestions(newRemainingQuestions);
+
+      if (newRemainingQuestions === 0) {
+        setShowAddToHomeScreen(true);
+      }
+      
       if (remainingQuestions < 3) {
         setShowAd(true);
         setCanCloseAd(false);
@@ -89,7 +98,6 @@ export const ChatInterface = () => {
         setShowDialog(true);
       }
       
-      setRemainingQuestions((prev) => Math.max(0, prev - 1));
       setMessage("");
       setShowRemainingQuestions(true);
     } catch (error) {
@@ -121,7 +129,6 @@ export const ChatInterface = () => {
 
   return (
     <div className="w-full max-w-2xl mx-auto p-4 space-y-6">
-      {/* Top Ad Banner */}
       <AdSpace position="top" />
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -162,37 +169,36 @@ export const ChatInterface = () => {
         </Button>
       </form>
 
-      {/* Bottom Ad Banner */}
       <AdSpace position="bottom" />
 
-      {/* Response Dialog */}
       <ResponseDialog 
         open={showDialog}
         onClose={handleCloseDialog}
         answer={answer}
       />
 
-      {/* Floating Ad */}
-      {showAd && showDialog && (
-        <FloatingAd
-          show={showAd}
-          onClose={() => {
-            if (canCloseAd) {
-              setShowAd(false);
-              setAdTimer(15);
-              window.location.reload();
-            }
-          }}
-          canClose={canCloseAd}
-          remainingTime={adTimer}
-        />
-      )}
+      <FloatingAd
+        show={showAd}
+        onClose={() => {
+          if (canCloseAd) {
+            setShowAd(false);
+            setAdTimer(15);
+            window.location.reload();
+          }
+        }}
+        canClose={canCloseAd}
+        remainingTime={adTimer}
+      />
 
-      {/* Renewal Dialog */}
       <RenewalDialog
         open={showRenewalDialog}
         onClose={() => setShowRenewalDialog(false)}
         onRenewal={handleRenewal}
+      />
+
+      <AddToHomeScreenDialog
+        open={showAddToHomeScreen}
+        onClose={() => setShowAddToHomeScreen(false)}
       />
     </div>
   );
