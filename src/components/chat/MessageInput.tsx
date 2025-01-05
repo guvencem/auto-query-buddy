@@ -1,7 +1,6 @@
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
-import { FileUpload } from "./FileUpload";
 
 interface MessageInputProps {
   message: string;
@@ -10,7 +9,6 @@ interface MessageInputProps {
   onSubmit: (e: React.FormEvent) => void;
   remainingQuestions: number;
   showRemainingQuestions: boolean;
-  onFileUpload: (file: File) => void;
 }
 
 export const MessageInput = ({
@@ -20,7 +18,6 @@ export const MessageInput = ({
   onSubmit,
   remainingQuestions,
   showRemainingQuestions,
-  onFileUpload,
 }: MessageInputProps) => {
   return (
     <form onSubmit={onSubmit} className="space-y-4">
@@ -30,8 +27,6 @@ export const MessageInput = ({
         placeholder="Araçla ilgili ne sorunun varsa, yazman yeter!"
         className="min-h-[120px] bg-white/80 backdrop-blur-sm border-2 border-primary/20 focus:border-primary rounded-xl transition-all duration-300 shadow-sm hover:shadow-md text-foreground placeholder:text-foreground/50"
       />
-
-      <FileUpload onFileUpload={onFileUpload} />
       
       {showRemainingQuestions && (
         <div className="animate-fadeIn bg-white/80 backdrop-blur-sm p-3 rounded-lg border border-primary/20 text-center">
