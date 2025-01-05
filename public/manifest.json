@@ -1,0 +1,21 @@
+{
+  "name": "Araba Akademisi",
+  "short_name": "Araba Akademisi",
+  "description": "Araç sorunlarınıza yapay zeka destekli çözümler",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#9b87f5",
+  "icons": [
+    {
+      "src": "/lovable-uploads/0c7dfd7d-d317-4b51-975c-b77e96d1423b.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/lovable-uploads/0c7dfd7d-d317-4b51-975c-b77e96d1423b.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

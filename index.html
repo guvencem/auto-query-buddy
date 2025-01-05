@@ -7,6 +7,8 @@
     <meta name="description" content="Araç sorunlarınıza yapay zeka destekli çözümler" />
     <meta name="author" content="Araba Akademisi" />
     <meta property="og:image" content="/og-image.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#9b87f5" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1468951974661165" crossorigin="anonymous"></script>
   </head>
@@ -15,5 +17,18 @@
     <div id="root"></div>
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('ServiceWorker registration successful');
+            })
+            .catch(err => {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
