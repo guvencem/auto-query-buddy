@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 
 declare global {
   interface Window {
@@ -19,7 +19,7 @@ export const FloatingAd = ({ show, onClose, canClose, remainingTime }: FloatingA
 
   const adUnitId = "ca-pub-XXXXXXXXXXXXXXXX";
 
-  React.useEffect(() => {
+  useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch (err) {

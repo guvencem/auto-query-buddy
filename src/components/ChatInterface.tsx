@@ -34,17 +34,22 @@ export const ChatInterface = () => {
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (showAd && adTimer > 0) {
+    if (showAd && !canCloseAd && adTimer > 0) {
       timer = setInterval(() => {
-        setAdTimer((prev) => prev - 1);
+        setAdTimer((prev) => {
+          if (prev <= 1) {
+            setCanCloseAd(true);
+            return 0;
+          }
+          return prev - 1;
+        });
       }, 1000);
-    } else if (adTimer === 0) {
-      setCanCloseAd(true);
     }
+
     return () => {
       if (timer) clearInterval(timer);
     };
-  }, [showAd, adTimer]);
+  }, [showAd, canCloseAd, adTimer]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
