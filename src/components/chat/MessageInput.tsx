@@ -31,7 +31,7 @@ export const MessageInput = ({
 
       <FileUpload 
         onFileUpload={(url) => {
-          setMessage((prev) => prev + `\n\nEk dosya: ${url}`);
+          setMessage(message + `\n\nEk dosya: ${url}`);
         }}
       />
       
