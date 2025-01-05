@@ -5,6 +5,7 @@ import { Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { ResponseDialog } from "./dialogs/ResponseDialog";
+import { RenewalDialog } from "./dialogs/RenewalDialog";
 import { AdSpace } from "./ads/AdSpace";
 import { FloatingAd } from "./ads/FloatingAd";
 
@@ -18,6 +19,7 @@ export const ChatInterface = () => {
   const [canCloseAd, setCanCloseAd] = useState(false);
   const [showRemainingQuestions, setShowRemainingQuestions] = useState(false);
   const [adTimer, setAdTimer] = useState(15);
+  const [showRenewalDialog, setShowRenewalDialog] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -47,6 +49,11 @@ export const ChatInterface = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim() || isLoading) return;
+
+    if (remainingQuestions <= 0) {
+      setShowRenewalDialog(true);
+      return;
+    }
     
     setIsLoading(true);
     try {
@@ -94,6 +101,14 @@ export const ChatInterface = () => {
     setShowAd(false);
     setAdTimer(15);
     setCanCloseAd(false);
+  };
+
+  const handleRenewal = () => {
+    setRemainingQuestions(3);
+    toast({
+      title: "Başarılı!",
+      description: "3 yeni soru hakkı kazandınız!",
+    });
   };
 
   return (
@@ -163,6 +178,13 @@ export const ChatInterface = () => {
           remainingTime={adTimer}
         />
       )}
+
+      {/* Renewal Dialog */}
+      <RenewalDialog
+        open={showRenewalDialog}
+        onClose={() => setShowRenewalDialog(false)}
+        onRenewal={handleRenewal}
+      />
     </div>
   );
 };
