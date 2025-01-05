@@ -9,6 +9,7 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
@@ -20,7 +21,7 @@ serve(async (req) => {
 
     const formData = await req.formData();
     const question = formData.get('question') as string;
-    const file = formData.get('file') as File;
+    const file = formData.get('file') as File | null;
     
     console.log('Received question:', question);
     console.log('Received file:', file?.name);
@@ -56,6 +57,8 @@ serve(async (req) => {
       });
     }
 
+    console.log('Sending request to OpenAI with messages:', messages);
+
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -66,6 +69,7 @@ serve(async (req) => {
         model: 'gpt-4o-mini',
         messages,
         temperature: 0.7,
+        max_tokens: 1000
       })
     });
 
