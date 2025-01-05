@@ -16,9 +16,9 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 py-0.5 flex justify-center items-center gap-4">
           <div className="transform hover:scale-105 transition-transform duration-300">
             <img 
-              src="/lovable-uploads/05154786-f4d8-479c-a08e-eafe2ae7508d.png" 
+              src="/lovable-uploads/555da69f-28ab-4bc5-b111-dd67085cb9b5.png" 
               alt="Araba Akademisi Logo" 
-              className="h-20 md:h-28 hover:drop-shadow-xl transition-all"
+              className="h-24 md:h-32 hover:drop-shadow-xl transition-all"
             />
           </div>
         </div>
