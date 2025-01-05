@@ -35,8 +35,14 @@ serve(async (req) => {
 
     if (file) {
       try {
-        const fileBuffer = await file.arrayBuffer();
-        const base64Data = btoa(String.fromCharCode(...new Uint8Array(fileBuffer)));
+        // Read the file as ArrayBuffer
+        const arrayBuffer = await file.arrayBuffer();
+        // Convert ArrayBuffer to Uint8Array
+        const uint8Array = new Uint8Array(arrayBuffer);
+        // Convert Uint8Array to base64
+        const base64String = btoa(String.fromCharCode.apply(null, uint8Array));
+        
+        console.log('File processed successfully, adding to messages');
         
         messages.push({
           role: 'user',
@@ -45,16 +51,14 @@ serve(async (req) => {
             {
               type: 'image_url',
               image_url: {
-                url: `data:${file.type};base64,${base64Data}`
+                url: `data:${file.type};base64,${base64String}`
               }
             }
           ]
         });
-        
-        console.log('Successfully processed image and added to messages');
       } catch (error) {
         console.error('Error processing file:', error);
-        throw new Error('Failed to process image file');
+        throw new Error(`Failed to process image file: ${error.message}`);
       }
     } else {
       messages.push({
@@ -63,7 +67,7 @@ serve(async (req) => {
       });
     }
 
-    console.log('Sending request to OpenAI with messages structure');
+    console.log('Sending request to OpenAI');
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -86,7 +90,7 @@ serve(async (req) => {
     }
 
     const data = await response.json();
-    console.log('Received response from OpenAI:', data);
+    console.log('Received response from OpenAI');
 
     if (!data.choices || !data.choices[0] || !data.choices[0].message) {
       throw new Error('Invalid response format from OpenAI');
