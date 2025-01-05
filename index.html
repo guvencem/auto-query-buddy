@@ -54,6 +54,21 @@
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js')
             .then(registration => {
+              // Service worker'ı güncellemek için kontrol et
+              registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'activated') {
+                    window.location.reload();
+                  }
+                });
+              });
+              
+              // Periyodik olarak güncellemeleri kontrol et
+              setInterval(() => {
+                registration.update();
+              }, 1000 * 60 * 60); // Her saat başı kontrol et
+              
               console.log('ServiceWorker registration successful');
             })
             .catch(err => {
