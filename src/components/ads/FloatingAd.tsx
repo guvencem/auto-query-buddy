@@ -17,7 +17,7 @@ interface FloatingAdProps {
 export const FloatingAd = ({ show, onClose, canClose, remainingTime }: FloatingAdProps) => {
   if (!show) return null;
 
-  const adUnitId = "BURAYA-ADSENSE-PUBLISHER-ID-YAZIN"; // AdSense publisher ID'nizi buraya yazın
+  const adUnitId = "ca-pub-1468951974661165"; // AdSense publisher ID'niz
 
   useEffect(() => {
     try {
@@ -48,7 +48,7 @@ export const FloatingAd = ({ show, onClose, canClose, remainingTime }: FloatingA
             className="adsbygoogle absolute inset-0"
             style={{ display: "block" }}
             data-ad-client={adUnitId}
-            data-ad-slot="BURAYA-ADSENSE-AD-SLOT-YAZIN"
+            data-ad-slot="0987654321" // AdSense'den aldığınız reklam slot ID'sini buraya yazın
             data-ad-format="auto"
             data-full-width-responsive="true"
           />
