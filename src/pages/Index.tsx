@@ -11,9 +11,9 @@ const Index = () => {
 
   // Logo image URL with different sizes
   const logoSizes = {
-    small: "/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png?w=200",
-    medium: "/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png?w=300",
-    large: "/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png?w=400"
+    small: "/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png",
+    medium: "/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png",
+    large: "/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png"
   };
 
   return (
