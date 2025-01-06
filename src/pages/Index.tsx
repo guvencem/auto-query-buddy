@@ -9,19 +9,16 @@ const Index = () => {
   const [isLoadingImage, setIsLoadingImage] = useState(false);
   const { toast } = useToast();
 
-  const logoUrl = "/lovable-uploads/a695c967-e7c6-44ba-9d3e-f3a7e3a355bd.png";
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background font-quicksand">
       {/* Header */}
       <header className="bg-[#9b87f5] shadow-lg animate-fadeIn">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex justify-center items-center gap-4">
+        <div className="max-w-7xl mx-auto px-4 py-0.5 flex justify-center items-center gap-4">
           <div className="transform hover:scale-105 transition-transform duration-300">
             <img 
-              src={logoUrl}
+              src="/lovable-uploads/2726651e-7d1e-4767-af14-851f153a8b9a.png" 
               alt="Araba Akademisi Logo" 
-              className="hover:drop-shadow-xl transition-all"
-              loading="eager"
+              className="h-28 md:h-36 hover:drop-shadow-xl transition-all"
             />
           </div>
         </div>
