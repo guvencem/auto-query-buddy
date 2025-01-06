@@ -11,9 +11,9 @@ const Index = () => {
 
   // Logo image URL with different sizes
   const logoSizes = {
-    small: "/lovable-uploads/2726651e-7d1e-4767-af14-851f153a8b9a.png?w=300",
-    medium: "/lovable-uploads/2726651e-7d1e-4767-af14-851f153a8b9a.png?w=600",
-    large: "/lovable-uploads/2726651e-7d1e-4767-af14-851f153a8b9a.png?w=1200"
+    small: "/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png?w=200",
+    medium: "/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png?w=300",
+    large: "/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png?w=400"
   };
 
   return (
@@ -34,10 +34,10 @@ const Index = () => {
               <img 
                 src={logoSizes.small}
                 alt="Araba Akademisi Logo" 
-                className="h-28 md:h-36 hover:drop-shadow-xl transition-all"
+                className="h-20 md:h-24 hover:drop-shadow-xl transition-all"
                 loading="eager"
-                width="300"
-                height="300"
+                width="200"
+                height="80"
               />
             </picture>
           </div>
