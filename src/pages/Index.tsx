@@ -20,10 +20,8 @@ const Index = () => {
             <img 
               src={logoUrl}
               alt="Araba Akademisi Logo" 
-              className="h-16 md:h-20 hover:drop-shadow-xl transition-all"
+              className="hover:drop-shadow-xl transition-all"
               loading="eager"
-              width="300"
-              height="120"
             />
           </div>
         </div>
