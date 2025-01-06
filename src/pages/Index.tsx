@@ -9,37 +9,22 @@ const Index = () => {
   const [isLoadingImage, setIsLoadingImage] = useState(false);
   const { toast } = useToast();
 
-  // Logo image URL with different sizes
-  const logoSizes = {
-    small: "/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png",
-    medium: "/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png",
-    large: "/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png"
-  };
+  const logoUrl = "/lovable-uploads/a695c967-e7c6-44ba-9d3e-f3a7e3a355bd.png";
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background font-quicksand">
       {/* Header */}
       <header className="bg-[#9b87f5] shadow-lg animate-fadeIn">
-        <div className="max-w-7xl mx-auto px-4 py-0.5 flex justify-center items-center gap-4">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex justify-center items-center gap-4">
           <div className="transform hover:scale-105 transition-transform duration-300">
-            <picture>
-              <source
-                media="(min-width: 1024px)"
-                srcSet={logoSizes.large}
-              />
-              <source
-                media="(min-width: 640px)"
-                srcSet={logoSizes.medium}
-              />
-              <img 
-                src={logoSizes.small}
-                alt="Araba Akademisi Logo" 
-                className="h-20 md:h-24 hover:drop-shadow-xl transition-all"
-                loading="eager"
-                width="200"
-                height="80"
-              />
-            </picture>
+            <img 
+              src={logoUrl}
+              alt="Araba Akademisi Logo" 
+              className="h-16 md:h-20 hover:drop-shadow-xl transition-all"
+              loading="eager"
+              width="300"
+              height="120"
+            />
           </div>
         </div>
       </header>

@@ -9,12 +9,12 @@
     <meta property="og:image" content="/og-image.png" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#9b87f5" />
-    <link rel="icon" type="image/webp" href="/lovable-uploads/2726651e-7d1e-4767-af14-851f153a8b9a.png" />
-    <link rel="apple-touch-icon" href="/lovable-uploads/2726651e-7d1e-4767-af14-851f153a8b9a.png" />
+    <link rel="icon" type="image/webp" href="/lovable-uploads/a695c967-e7c6-44ba-9d3e-f3a7e3a355bd.png" />
+    <link rel="apple-touch-icon" href="/lovable-uploads/a695c967-e7c6-44ba-9d3e-f3a7e3a355bd.png" />
     
     <!-- Preload critical assets -->
     <link rel="preload" href="/fonts/Quicksand-Regular.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png" as="image" />
+    <link rel="preload" href="/lovable-uploads/a695c967-e7c6-44ba-9d3e-f3a7e3a355bd.png" as="image" />
     
     <!-- Critical CSS -->
     <style>
@@ -38,8 +38,8 @@
         z-index: 9999;
       }
       #initial-loader img {
-        width: 200px;
-        height: 80px;
+        width: 300px;
+        height: 120px;
         animation: pulse 1.5s infinite;
       }
       @keyframes pulse {
@@ -66,10 +66,10 @@
   <body>
     <div id="initial-loader">
       <img 
-        src="/lovable-uploads/38d1c63e-a5d7-4d4d-aa16-21fadb894cde.png" 
+        src="/lovable-uploads/a695c967-e7c6-44ba-9d3e-f3a7e3a355bd.png" 
         alt="Yükleniyor..."
-        width="200"
-        height="80"
+        width="300"
+        height="120"
         fetchpriority="high"
       />
     </div>
@@ -80,7 +80,6 @@
     
     <!-- Font and Service Worker Loading -->
     <script>
-      // Font loading detection
       if ("fonts" in document) {
         document.fonts.ready.then(function () {
           document.documentElement.classList.add('font-loaded');
