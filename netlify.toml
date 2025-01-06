@@ -1,0 +1,24 @@
+[[redirects]]
+  from = "http://arabaakademisi.com/*"
+  to = "https://www.arabaakademisi.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://arabaakademisi.com/*"
+  to = "https://www.arabaakademisi.com/:splat"
+  status = 301
+  force = true
+
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
