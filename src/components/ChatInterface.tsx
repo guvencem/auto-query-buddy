@@ -5,6 +5,7 @@ import { ResponseDialog } from "./dialogs/ResponseDialog";
 import { RenewalDialog } from "./dialogs/RenewalDialog";
 import { AddToHomeScreenDialog } from "./dialogs/AddToHomeScreenDialog";
 import { AdSpace } from "./ads/AdSpace";
+import { AdcashAd } from "./ads/AdcashAd";
 import { FloatingAd } from "./ads/FloatingAd";
 import { MessageInput } from "./chat/MessageInput";
 
@@ -137,6 +138,8 @@ export const ChatInterface = () => {
       />
 
       <AdSpace position="bottom" />
+      
+      <AdcashAd />
 
       <ResponseDialog 
         open={showDialog}
