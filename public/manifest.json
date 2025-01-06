@@ -8,14 +8,14 @@
   "theme_color": "#9b87f5",
   "icons": [
     {
-      "src": "/images/optimized/logo.webp",
+      "src": "/lovable-uploads/2726651e-7d1e-4767-af14-851f153a8b9a.png",
       "sizes": "192x192",
-      "type": "image/webp"
+      "type": "image/png"
     },
     {
-      "src": "/images/optimized/logo.webp",
+      "src": "/lovable-uploads/2726651e-7d1e-4767-af14-851f153a8b9a.png",
       "sizes": "512x512",
-      "type": "image/webp"
+      "type": "image/png"
     }
   ]
 }
