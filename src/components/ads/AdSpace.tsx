@@ -11,8 +11,6 @@ interface AdSpaceProps {
 }
 
 export const AdSpace = ({ position }: AdSpaceProps) => {
-  const adUnitId = "ca-pub-1468951974661165"; // AdSense publisher ID'niz
-
   React.useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -38,9 +36,9 @@ export const AdSpace = ({ position }: AdSpaceProps) => {
     >
       <ins
         className="adsbygoogle absolute inset-0"
-        style={{ display: "block" }}
-        data-ad-client={adUnitId}
-        data-ad-slot="1234567890" // AdSense'den aldığınız reklam slot ID'sini buraya yazın
+        style={{ display: "inline-block", width: "728px", height: "90px" }}
+        data-ad-client="ca-pub-1468951974661165"
+        data-ad-slot="5313941435"
         data-ad-format="auto"
         data-full-width-responsive="true"
       />
