@@ -24,7 +24,7 @@ export const AdSpace = ({ position }: AdSpaceProps) => {
   return (
     <div 
       className={`
-        w-full min-h-[100px] 
+        w-[728px] h-[90px] mx-auto
         ${position === "bottom" ? "mt-8" : "mb-8"}
         bg-white/50 backdrop-blur-sm
         border-2 border-primary/20
